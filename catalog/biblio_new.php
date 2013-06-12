@@ -2,6 +2,17 @@
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
  */
+ 
+ /**********************************************************************************
+ *
+ *              CHANGE HISTORY
+ *  
+ *       #C1 - this is a feature to add reading level to biblio to help track students progress in reading.
+ *                AUTHOR - KIRAN KUMAR REDDY
+ *        changes to this file include adding a new row to describe  reading level.
+ *
+ **********************************************************************************/
+
 
 require_once("../shared/common.php");
 
@@ -48,6 +59,9 @@ function postVarsToBiblio($post) {
   $biblio->setCallNmbr1($post["callNmbr1"]);
   $biblio->setCallNmbr2($post["callNmbr2"]);
   $biblio->setCallNmbr3($post["callNmbr3"]);
+  // #C1 - begin
+  $biblio->setReadingLevel($post["readingLevel"]);
+  // #C1 - end
   $biblio->setLastChangeUserid($_SESSION["userid"]);
   $biblio->setOpacFlg(isset($post["opacFlg"]));
   $indexes = $post["indexes"];
