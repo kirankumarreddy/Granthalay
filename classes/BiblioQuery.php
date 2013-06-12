@@ -17,6 +17,18 @@ require_once("../classes/Localize.php");
  * @access public
  ******************************************************************************
  */
+ 
+ /**********************************************************************************
+ *
+ *              CHANGE HISTORY
+ *  
+ *       #C1 - this is a feature to add reading level to biblio to help track students progress in reading.
+ *                AUTHOR - KIRAN KUMAR REDDY
+ *        changes to this file include adding a new row to describe  reading level.
+ *
+ **********************************************************************************
+ */
+
 class BiblioQuery extends Query {
   var $_itemsPerPage = 1;
   var $_rowNmbr = 0;
@@ -97,6 +109,9 @@ class BiblioQuery extends Query {
     }
     $bib->setMaterialCd($array["material_cd"]);
     $bib->setCollectionCd($array["collection_cd"]);
+	// #C1 - begin
+    $bib->setReadingLevel($array["reading_level"]); 
+	// #C1 - end   
     $bib->setCallNmbr1($array["call_nmbr1"]);
     $bib->setCallNmbr2($array["call_nmbr2"]);
     $bib->setCallNmbr3($array["call_nmbr3"]);
@@ -247,10 +262,10 @@ class BiblioQuery extends Query {
         $bibfields[$name] = '';
       }
     }
-
+ // #C1 - begin
     $sql = $this->mkSQL("insert into biblio values(null, sysdate(), sysdate(), "
                         . "%N, %N, %N, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, "
-                        . "%Q, %Q, %Q, %Q, %Q) ",
+                        . "%Q, %Q, %Q, %Q, %Q, %Q) ",
                         $biblio->getLastChangeUserid(),
                         $biblio->getMaterialCd(), $biblio->getCollectionCd(),
                         $biblio->getCallNmbr1(),
@@ -261,7 +276,8 @@ class BiblioQuery extends Query {
                         $bibfields['topic1'], $bibfields['topic2'],
                         $bibfields['topic3'], $bibfields['topic4'],
                         $bibfields['topic5'],
-                        $biblio->showInOpac() ? "Y" : "N");
+                        $biblio->showInOpac() ? "Y" : "N",$biblio->getReadingLevel());
+  // #C1 - end						
     if (!$this->_query($sql, $this->_loc->getText("biblioQueryInsertErr1"))) {
       return false;
     }

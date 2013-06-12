@@ -33,6 +33,17 @@
  *
  **********************************************************************************
  */
+ 
+ /**********************************************************************************
+ *
+ *              CHANGE HISTORY
+ *  
+ *       #C1 - this is a feature to add reading level to biblio to help track students progress in reading.
+ *                AUTHOR - KIRAN KUMAR REDDY
+ *        changes to this file include adding a new row to describe  reading level.
+ *
+ **********************************************************************************/
+
 
 #****************************************************************************
 #*  Common translation text shared among multiple pages
@@ -47,6 +58,9 @@ $trans["biblioViewTble1Hdr"]       = "\$text = 'Bibliography Information';";
 $trans["biblioViewMaterialType"]   = "\$text = 'Material Type';";
 $trans["biblioViewCollection"]     = "\$text = 'Collection';";
 $trans["biblioViewCallNmbr"]       = "\$text = 'Call Number';";
+// #C1 - begin
+$trans["biblioViewReadingLevel"]   = "\$text = 'Reading Level';";
+// #C1 - end
 $trans["biblioViewTble2Hdr"]       = "\$text = 'Bibliography Copy Information';";
 $trans["biblioViewTble2Col1"]      = "\$text = 'Barcode #';";
 $trans["biblioViewTble2Col2"]      = "\$text = 'Description';";

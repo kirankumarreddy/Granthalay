@@ -14,6 +14,18 @@
  * @access public
  ******************************************************************************
  */
+ 
+ /**********************************************************************************
+ *
+ *              CHANGE HISTORY
+ *  
+ *       #C1 - this is a feature to add reading level to biblio to help track students progress in reading.
+ *                AUTHOR - KIRAN KUMAR REDDY
+ *        changes to this file include adding a new row to describe  reading level.
+ *
+ **********************************************************************************
+ */
+
 class Biblio {
   var $_bibid = "";
   var $_createDt = "";
@@ -22,6 +34,9 @@ class Biblio {
   var $_lastChangeUsername = "";
   var $_materialCd = "";
   var $_collectionCd = "";
+  // #C1 - begin
+  var $_readingLevel = "";
+  // #C1 - end
   var $_callNmbr1 = "";
   var $_callNmbr2 = "";
   var $_callNmbr3 = "";
@@ -80,6 +95,11 @@ class Biblio {
   function getCollectionCd() {
     return $this->_collectionCd;
   }
+  // #C1 - begin
+  function getReadingLevel() {
+    return $this->_readingLevel;
+  }
+  // #C1 - end
   function getCallNmbr1() {
     return $this->_callNmbr1;
   }
@@ -127,6 +147,11 @@ class Biblio {
   function setCollectionCd($value) {
     $this->_collectionCd = trim($value);
   }
+  // #C1 - begin
+  function setReadingLevel($value) {
+    $this->_readingLevel = trim($value);
+  }
+  // #C1 - end
   function setCallNmbr1($value) {
     $this->_callNmbr1 = trim($value);
   }

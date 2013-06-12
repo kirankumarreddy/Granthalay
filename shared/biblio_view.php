@@ -154,6 +154,14 @@
   </tr>
   <tr>
     <td class="primary" valign="top">
+      <?php echo $loc->getText("biblioViewReadingLevel"); ?>:
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($biblio->getReadingLevel()); ?>
+	  </td>
+	</tr>  
+  <tr>
+    <td class="primary" valign="top">
       <?php printUsmarcText(245,"a",$marcTags, $marcSubflds, FALSE);?>:
     </td>
     <td valign="top" class="primary">
