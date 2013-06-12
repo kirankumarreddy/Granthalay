@@ -2,6 +2,16 @@
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
  */
+ /**********************************************************************************
+ *
+ *              CHANGE HISTORY
+ *  
+ *       #C1 - this is a feature to add reading level to biblio to help track students progress in reading.
+ *                AUTHOR - KIRAN KUMAR REDDY
+ *        changes to this file include adding a new row to describe  reading level.
+ *
+ **********************************************************************************/
+
 
   require_once("../classes/DmQuery.php");
   require_once("../classes/UsmarcTagDm.php");
@@ -115,6 +125,16 @@
       <?php printInputText("callNmbr3",20,20,$postVars,$pageErrors); ?>
     </td>
   </tr>
+  // #C1 - begin
+  <tr>
+    <td nowrap="true" class="primary" valign="top">
+      <sup>*</sup> <?php echo $loc->getText("biblioFieldsReadlingLevel"); ?>:
+    </td>
+    <td valign="top" class="primary">
+      <?php printInputText("readingLevel",20,20,$postVars,$pageErrors); ?><br>
+    </td>
+  </tr>
+  // #C1- end
   <tr>
     <td nowrap="true" class="primary" valign="top">
       <?php echo $loc->getText("biblioFieldsOpacFlg"); ?>:

@@ -3,9 +3,23 @@
  * See the file COPYRIGHT.html for more details.
  */
  
+ /**********************************************************************************
+ *
+ *              CHANGE HISTORY
+ *  
+ *       #C1 - this is a feature to add reading level to biblio to help track students progress in reading.
+ *                AUTHOR - KIRAN KUMAR REDDY
+ *        changes to this file include adding a new row to describe  reading level.
+ *
+ **********************************************************************************/
+
+ 
   $postVars["bibid"] = $biblio->getBibid();
   $postVars["collectionCd"] = $biblio->getCollectionCd();
   $postVars["materialCd"] = $biblio->getMaterialCd();
+  // #C1 - begin
+  $postVars["readingLevel"] = $biblio->getReadingLevel();
+  // #C1 - end
   $postVars["callNmbr1"] = $biblio->getCallNmbr1();
   $postVars["callNmbr2"] = $biblio->getCallNmbr2();
   $postVars["callNmbr3"] = $biblio->getCallNmbr3();
