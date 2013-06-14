@@ -271,12 +271,13 @@ class BiblioQuery extends Query {
                         $biblio->getCallNmbr1(),
                         $biblio->getCallNmbr2(),
                         $biblio->getCallNmbr3(),
+    		            $biblio->getReadingLevel(),
                         $bibfields['title'], $bibfields['title_remainder'],
                         $bibfields['responsibility_stmt'], $bibfields['author'],
                         $bibfields['topic1'], $bibfields['topic2'],
                         $bibfields['topic3'], $bibfields['topic4'],
                         $bibfields['topic5'],
-                        $biblio->showInOpac() ? "Y" : "N",$biblio->getReadingLevel());
+                        $biblio->showInOpac() ? "Y" : "N");
   // #C1 - end						
     if (!$this->_query($sql, $this->_loc->getText("biblioQueryInsertErr1"))) {
       return false;

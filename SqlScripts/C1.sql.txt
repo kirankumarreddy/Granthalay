@@ -1,1 +1,0 @@
-Alter table biblio add column reading_level char(10)
