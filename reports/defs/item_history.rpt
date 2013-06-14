@@ -1,6 +1,7 @@
 .title "Item Checkout History"
 .category Circulation
 .column bibid hidden
+.column barcode_nmbr title="barcode" sort=barcode_nmbr
 .column call_num sort=call_num
 .column title sort=title func=biblio_link
 .column author sort=author
@@ -21,16 +22,20 @@
 .	end order_by
 .end parameters
 .sql
-	SELECT b.bibid,
-		CONCAT_WS(' ', b.call_nmbr1, b.call_nmbr2, b.call_nmbr3) AS call_num,
-		CONCAT(b.title, ' ', IFNULL(b.title_remainder, '')) AS title,
-		b.author, m.mbrid,
-		CONCAT(m.last_name,', ',  m.first_name) AS member,
-		s.status_begin_dt AS checkout,
-		s.due_back_dt AS due
-	FROM biblio b, biblio_status_hist s, member m
-	WHERE s.bibid=b.bibid AND s.mbrid=m.mbrid
-		AND s.status_cd='out'
+	SELECT b.bibid, c.barcode_nmbr AS barcode_nmbr, CONCAT_WS(  ' ', b.call_nmbr1, b.call_nmbr2, b.call_nmbr3 ) AS call_num, CONCAT( b.title,  ' ', IFNULL( b.title_remainder,  '' ) ) AS title, b.author, m.mbrid, CONCAT( m.last_name,  ', ', m.first_name ) AS member, s.status_begin_dt AS checkout, s.due_back_dt AS due
+FROM biblio_status_hist s, biblio_copy c, member m, biblio b
+WHERE s.mbrid = m.mbrid
+AND b.bibid = ( 
+SELECT bibid
+FROM biblio
+WHERE bibid = s.bibid ) 
+AND c.barcode_nmbr = (
+ SELECT barcode_nmbr 
+FROM biblio_copy
+WHERE mbrid = s.mbrid
+AND copyid = s.copyid
+AND bibid = s.bibid ) 
+AND s.status_cd =  'out'
 .if_set title
 		AND CONCAT(b.title, ' ', IFNULL(b.title_remainder, '')) LIKE '%%%"title%%%'
 .end if_set
