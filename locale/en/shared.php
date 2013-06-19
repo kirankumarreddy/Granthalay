@@ -41,7 +41,8 @@
  *       #C1 - this is a feature to add reading level to biblio to help track students progress in reading.
  *                AUTHOR - KIRAN KUMAR REDDY
  *        changes to this file include adding a new row to describe  reading level.
- *
+ *     #C4 - This change contains adding new fields Basket number to Biblio and Biblio_copy.
+ *                AUTHOR - BOGADE SAITEJA AND KIRAN KUMAR REDDY.
  **********************************************************************************/
 
 
@@ -67,6 +68,9 @@ $trans["biblioViewTble2Col2"]      = "\$text = 'Description';";
 $trans["biblioViewTble2Col3"]      = "\$text = 'Status';";
 $trans["biblioViewTble2Col4"]      = "\$text = 'Status Dt';";
 $trans["biblioViewTble2Col5"]      = "\$text = 'Due Back';";
+//#C4 - begin
+$trans["biblioViewTble2Col6"]      = "\$text = 'Basket Number';";
+//#C4 - end
 $trans["biblioViewTble2ColFunc"]   = "\$text = 'Function';";
 $trans["biblioViewTble2Coldel"]    = "\$text = 'del';";
 $trans["biblioViewTble2Coledit"]   = "\$text = 'edit';";
