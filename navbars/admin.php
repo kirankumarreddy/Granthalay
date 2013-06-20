@@ -1,7 +1,9 @@
 <?php
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
+ * C3- This is adding a new feature of bulkupload  to admin section. Here BulkUpload option in the left list of admin list 
  */
+ 
  
   require_once("../classes/Localize.php");
   $navLoc = new Localize(OBIB_LOCALE,"navbars");
@@ -57,7 +59,13 @@
 <?php } else { ?>
  <a href="../admin/collections_list.php" class="alt1"><?php echo $navLoc->getText("adminCollections");?></a><br>
 <?php } ?>
-
+<!--C3 -begin-->
+<?php if ($nav == "BulkUpload") { ?>
+ &raquo; <?php echo $navLoc->getText("bulkupload");?><br>
+<?php } else { ?>
+ <a href="../admin/adminBulkUpload_list.php" class="alt1"><?php echo $navLoc->getText("adminBulkUpload");?></a><br>
+<?php } ?>
+<!--#C3 -end-->
 <?php if ($nav == "checkout_privs") { ?>
  &raquo; <?php echo $navLoc->getText("Checkout Privs");?><br>
 <?php } else { ?>
