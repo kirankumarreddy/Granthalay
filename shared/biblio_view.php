@@ -1,6 +1,8 @@
 <?php
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
+ *     #C4 - This change contains adding new fields Basket number to Biblio and Biblio_copy.
+ *                AUTHOR - BOGADE SAITEJA AND KIRAN KUMAR REDDY.
  */
  
   require_once("../shared/common.php");
@@ -250,6 +252,11 @@
     <th align="left" nowrap="yes">
       <?php echo $loc->getText("biblioViewTble2Col2"); ?>
     </th>
+<!--#C4 -begin-->
+	 <th align="left" nowrap="yes">
+      <?php echo $loc->getText("biblioViewTble2Col6"); ?>
+    </th>
+<!--#C4 -end-->
     <th align="left" nowrap="yes">
       <?php echo $loc->getText("biblioViewTble2Col3"); ?>
     </th>
@@ -282,10 +289,17 @@
       <?php } ?>
       <td valign="top" class="<?php echo H($row_class);?>">
         <?php echo H($copy->getBarcodeNmbr()); ?>
+		</td>
+      
       </td>
       <td valign="top" class="<?php echo H($row_class);?>">
         <?php echo H($copy->getCopyDesc()); ?>
       </td>
+<!--#C4 -begin-->
+	  <td valign="top" class="<?php echo H($row_class);?>">
+        <?php echo H($copy->getBasketNumber()); ?>
+      </td>
+<!--#C4 -end-->
       <td valign="top" class="<?php echo H($row_class);?>">
         <?php echo H($biblioStatusDm[$copy->getStatusCd()]); ?>
       </td>

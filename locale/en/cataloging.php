@@ -1,6 +1,8 @@
 <?php
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
+ *     #C4 - This change contains adding new fields Basket number to Biblio and Biblio_copy.
+ *                AUTHOR - BOGADE SAITEJA AND KIRAN KUMAR REDDY.
  */
  
 /**********************************************************************************
@@ -95,6 +97,9 @@ $trans["biblioEditSuccess"]        = "\$text = 'Bibliography successfully update
 #****************************************************************************
 $trans["biblioCopyNewFormLabel"]   = "\$text = 'Add New Copy';";
 $trans["biblioCopyNewBarcode"]     = "\$text = 'Barcode Number';";
+//#C4- begin
+$trans["biblioCopyBasketNumber"]  = "\$text = 'Basket Number';";
+//#C4- end
 $trans["biblioCopyNewDesc"]        = "\$text = 'Description';";
 $trans["biblioCopyNewAuto"]        = "\$text = 'Autogenerate';";
 $trans["biblioCopyNewValidBarco"]  = "\$text = 'Validate for printing';";

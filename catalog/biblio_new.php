@@ -59,9 +59,9 @@ function postVarsToBiblio($post) {
   $biblio->setCallNmbr1($post["callNmbr1"]);
   $biblio->setCallNmbr2($post["callNmbr2"]);
   $biblio->setCallNmbr3($post["callNmbr3"]);
-  // #C1 - begin
+   //#C1 - begin
   $biblio->setReadingLevel($post["readingLevel"]);
-  // #C1 - end
+   //#C1 - end
   $biblio->setLastChangeUserid($_SESSION["userid"]);
   $biblio->setOpacFlg(isset($post["opacFlg"]));
   $indexes = $post["indexes"];
@@ -138,7 +138,7 @@ function showForm($postVars, $pageErrors=array()) {
   $headerWording=$loc->getText("biblioNewFormLabel");
 ?>
   <script language="JavaScript">
-    <!--
+   <!--
       function matCdReload(){
         document.newbiblioform.posted.value='media_change';
         document.newbiblioform.submit();
