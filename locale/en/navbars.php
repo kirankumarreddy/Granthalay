@@ -30,7 +30,7 @@
  *       } else {
  *         \$text = '%items% results';
  *       }";
- *
+ * #C3- It is the change related to bulkupload feature in admin section.Here keyword and value related to bulkupload optio * n on the left side(list) is added.)  
  **********************************************************************************
  */
 
@@ -57,7 +57,9 @@ $trans["adminMaterialTypes"]       = "\$text = 'Material Types';";
 $trans["adminCollections"]         = "\$text = 'Collections';";
 $trans["adminThemes"]              = "\$text = 'Themes';";
 $trans["adminTranslation"]         = "\$text = 'Translation';";
-
+#C3 -begin
+$trans["adminBulkUpload"]          = "\$text = 'Bulk Upload';";
+#C3 -end
 #****************************************************************************
 #*  Translation text for page cataloging.php
 #****************************************************************************
