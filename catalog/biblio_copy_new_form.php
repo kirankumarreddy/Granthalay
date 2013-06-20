@@ -1,6 +1,8 @@
 <?php
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
+ * #C4 - This change contains adding new fields Ciculation Status and Basket number to Biblio and Biblio_copy.
+ *                AUTHOR - BOGADE SAITEJA AND KIRAN KUMAR REDDY. 
  */
  
   require_once("../shared/common.php");
@@ -70,6 +72,16 @@
       <?php printInputText("copyDesc",40,40,$postVars,$pageErrors); ?>
     </td>
   </tr>
+  <!--#C4 -begin-->
+ <tr>
+    <td nowrap="true" class="primary" valign="top">
+      <?php echo $loc->getText("biblioCopyBasketNumber"); ?>:
+    </td>
+    <td valign="top" class="primary">
+      <?php printInputText("basket_nmbr",40,40,$postVars,$pageErrors); ?>
+    </td>
+  </tr>
+ <!--#C4 -end-->
 <?php
   foreach ($customFields as $name => $title) {
     echo '<tr><td nowrap="true" class="primary" valign="top">'.H($title).':</td>';

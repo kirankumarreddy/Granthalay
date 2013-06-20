@@ -1,6 +1,8 @@
 <?php
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
+ * #C4 - This change contains adding new fields Basket number to Biblio and Biblio_copy.
+ *                AUTHOR - BOGADE SAITEJA AND KIRAN KUMAR REDDY. 
  */
  
   require_once("../shared/common.php");
@@ -64,6 +66,10 @@
   $_POST["copyDesc"] = $copy->getCopyDesc();
   $copy->setBarcodeNmbr($_POST["barcodeNmbr"]);
   $_POST["barcodeNmbr"] = $copy->getBarcodeNmbr();
+   //#C4 -begin
+  $copy->setBasketNumber($_POST["basket_nmbr"]);
+  $_POST["basket_nmbr"] = $copy->getBasketNumber();
+  //#C4 -end
   
   $dmQ = new DmQuery();
   $dmQ->connect();

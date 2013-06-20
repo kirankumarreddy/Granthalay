@@ -1,6 +1,8 @@
 <?php
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
+  *     #C4 - This change contains adding new fields Basket number to Biblio and Biblio_copy.
+ *                AUTHOR - BOGADE SAITEJA AND KIRAN KUMAR REDDY.
  */
  
 /****************************************************************************
@@ -39,6 +41,10 @@ define("OBIB_DEFAULT_STATUS","in");
 define("OBIB_STATUS_IN","in");
 define("OBIB_STATUS_OUT","out");
 define("OBIB_STATUS_ON_LOAN","ln");
+define("OBIB_STATUS_DISPLAY_AREA","dis");
+//#C4 -begin
+define("OBIB_STATUS_INACTIVE","ina");
+//#C4 -end
 define("OBIB_STATUS_ON_ORDER","ord");
 define("OBIB_STATUS_SHELVING_CART","crt");
 define("OBIB_STATUS_ON_HOLD","hld");

@@ -1,6 +1,8 @@
 <?php
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
+ *     #C4 - This change contains adding new fields Basket number to Biblio and Biblio_copy.
+ *                AUTHOR - BOGADE SAITEJA AND KIRAN KUMAR REDDY.
  */
  
 require_once("../shared/global_constants.php");
@@ -132,6 +134,9 @@ class BiblioCopyQuery extends Query {
     $copy->setCreateDt($array["create_dt"]);
     $copy->setCopyDesc($array["copy_desc"]);
     $copy->setBarcodeNmbr($array["barcode_nmbr"]);
+	//#C4 - begin
+	$copy->setBasketNumber($array["basket_number"]);
+	//#C4 - end
     $copy->setStatusCd($array["status_cd"]);
     $copy->setStatusBeginDt($array["status_begin_dt"]);
     $copy->setDueBackDt($array["due_back_dt"]);
@@ -236,7 +241,11 @@ class BiblioCopyQuery extends Query {
     } else {
       $sql .= $this->mkSQL("%Q,", $copy->getMbrid());
     }
-    $sql .= " 0)"; //Default renewal count to zero
+    $sql .= " 0,"; //Default renewal count to zero
+	//#C4-begin
+	$sql .= "'" . $copy->getBasketNumber() . "'";
+	$sql .= ")";
+	//#C4-end
     $ret = $this->_query($sql, $this->_loc->getText("biblioCopyQueryErr3"));
     if (!$ret) {
       return $ret;
@@ -256,11 +265,13 @@ class BiblioCopyQuery extends Query {
       $this->_error = $this->_loc->getText("biblioCopyQueryErr2",array("barcodeNmbr"=>$copy->getBarcodeNmbr()));
       return false;
     }
+	//#C4- begin
     $sql = $this->mkSQL("update biblio_copy set "
-                        . "copy_desc=%Q, barcode_nmbr=%Q "
-                        . "where bibid=%N and copyid=%N",
-                        $copy->getCopyDesc(), $copy->getBarcodeNmbr(),
+                        . "copy_desc=%Q, barcode_nmbr=%Q, basket_number=%Q"
+                        . "where bibid=%N AND copyid=%N",
+                        $copy->getCopyDesc(), $copy->getBarcodeNmbr(), $copy->getBasketNumber(),
                         $copy->getBibid(), $copy->getCopyid());
+	//#C4- end
     $ret = $this->_query($sql, $this->_loc->getText("biblioCopyQueryErr5"));
     if (!$ret) {
       return $ret;
