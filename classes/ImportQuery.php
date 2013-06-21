@@ -66,7 +66,7 @@ function alreadyInDB($title) {
  */
 function insertBiblioCopy($data, $lastInsertID) {
 	
-	$sql  = "INSERT INTO biblio_copy (create_dt, bibid, barcode_nmbr, circulationSts, status_begin_dt, basketnmbr) VALUES ( ";
+	$sql  = "INSERT INTO biblio_copy (create_dt, bibid, barcode_nmbr, status_cd, status_begin_dt, basket_nmbr) VALUES ( ";
 	$sql .= "'" . date("Y-m-d H:i:s") . "','" . $lastInsertID .  "','" . $data[0] . "','" . $data[3] . "','" . date("Y-m-d H:i:s") . "','";
 	$sql .= $data[5]. "' ) " ;
   	$r = $this->_act($sql);

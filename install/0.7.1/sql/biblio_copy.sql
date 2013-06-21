@@ -10,6 +10,7 @@ create table %prfx%biblio_copy (
   ,due_back_dt date null
   ,mbrid integer null
   ,renewal_count tinyint unsigned not null
+  ,basket_nmbr varchar(10) not null 
   ,index barcode_index (barcode_nmbr)
   ,index mbr_index (mbrid)
   ,primary key(bibid,copyid)

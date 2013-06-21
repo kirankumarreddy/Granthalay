@@ -135,7 +135,7 @@ class BiblioCopyQuery extends Query {
     $copy->setCopyDesc($array["copy_desc"]);
     $copy->setBarcodeNmbr($array["barcode_nmbr"]);
 	//#C4 - begin
-	$copy->setBasketNumber($array["basket_number"]);
+	$copy->setBasketNumber($array["basket_nmbr"]);
 	//#C4 - end
     $copy->setStatusCd($array["status_cd"]);
     $copy->setStatusBeginDt($array["status_begin_dt"]);
@@ -267,7 +267,7 @@ class BiblioCopyQuery extends Query {
     }
 	//#C4- begin
     $sql = $this->mkSQL("update biblio_copy set "
-                        . "copy_desc=%Q, barcode_nmbr=%Q, basket_number=%Q"
+                        . "copy_desc=%Q, barcode_nmbr=%Q, basket_nmbr=%Q"
                         . "where bibid=%N AND copyid=%N",
                         $copy->getCopyDesc(), $copy->getBarcodeNmbr(), $copy->getBasketNumber(),
                         $copy->getBibid(), $copy->getCopyid());

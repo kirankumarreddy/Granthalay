@@ -49,7 +49,16 @@
 			continue;
 	  }
 	  if (strlen(trim($columns[3]))==0) {
-	  		$columns[3] = "Active";
+	  		$columns[3] = "in";
+ 	  }
+	  if (strcmp($columns[3],'Missing')==0) {
+	  		$columns[3] = "lst";
+ 	  }
+	  if (strcmp($columns[3],'Yes')==0) {
+	  		$columns[3] = "in";
+ 	  }
+	  if (strcmp($columns[3],'No')==0) {
+	  		$columns[3] = "ina";
  	  }
 	  if (strlen(trim($columns[4]))==0) {
 			$b[$rowcount]="Record " . $rowcount . " Reading Level not entered.";
