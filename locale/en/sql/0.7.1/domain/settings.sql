@@ -1,7 +1,7 @@
 insert into %prfx%settings
 values (
-  'Your Library Name'
-  ,'../images/sampleLogo.png'
+  ''
+  ,'../images/logo.png'
   ,'N'
   ,'M-F 8am-9pm, Sa noon-5pm, Su 1-5pm'
   ,'111-222-3333'

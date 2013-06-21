@@ -7,7 +7,7 @@
  *  \/  the MySQL database and user that you have created for OpenBiblio.   \/
  *********************************************************************************
  */
-define("OBIB_HOST",     "127.0.0.1");
+define("OBIB_HOST",     "localhost");
 define("OBIB_DATABASE", "granthalay");
 define("OBIB_USERNAME", "granthalay");
 define("OBIB_PWD",      "granthalay");
