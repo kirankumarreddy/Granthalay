@@ -125,7 +125,7 @@
       <?php printInputText("callNmbr3",20,20,$postVars,$pageErrors); ?>
     </td>
   </tr>
-  // #C1 - begin
+  <!-- #C1 - begin-->
   <tr>
     <td nowrap="true" class="primary" valign="top">
       <sup>*</sup> <?php echo $loc->getText("biblioFieldsReadlingLevel"); ?>:
@@ -134,7 +134,7 @@
       <?php printInputText("readingLevel",20,20,$postVars,$pageErrors); ?><br>
     </td>
   </tr>
-  // #C1- end
+  <!-- #C1- end-->
   <tr>
     <td nowrap="true" class="primary" valign="top">
       <?php echo $loc->getText("biblioFieldsOpacFlg"); ?>:

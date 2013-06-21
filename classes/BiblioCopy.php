@@ -1,6 +1,8 @@
 <?php
 /* This file is part of a copyrighted work; it is distributed with NO WARRANTY.
  * See the file COPYRIGHT.html for more details.
+ * #C4 - This change contains adding new fields Basket number to Biblio and Biblio_copy.
+ *                AUTHOR - BOGADE SAITEJA AND KIRAN KUMAR REDDY.
  */
  
   require_once("../classes/Localize.php");
@@ -21,6 +23,9 @@ class BiblioCopy {
   var $_createDt = "";
   var $_copyDesc = "";
   var $_barcodeNmbr = "";
+  //#C4 -begin
+  var $_basketnmbr ="";
+  //#C4 -end
   var $_barcodeNmbrError = "";
   var $_statusCd = OBIB_DEFAULT_STATUS;
   var $_statusBeginDt = "";
@@ -83,6 +88,11 @@ class BiblioCopy {
   function getBarcodeNmbr() {
     return $this->_barcodeNmbr;
   }
+  //#C4 -begin
+  function getBasketNumber() {
+    return $this->_basketnmbr;
+	}
+  //#C4 -end
   function getBarcodeNmbrError() {
     return $this->_barcodeNmbrError;
   }
@@ -127,6 +137,11 @@ class BiblioCopy {
   function setBarcodeNmbr($value) {
     $this->_barcodeNmbr = trim($value);
   }
+  //#C4 -begin
+  function setBasketNumber($value) {
+    $this->_basketnmbr = trim($value);
+ 	}
+  //#C4 -end
   function setStatusCd($value) {
     $this->_statusCd = trim($value);
   }

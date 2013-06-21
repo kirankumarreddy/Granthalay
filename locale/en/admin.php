@@ -31,6 +31,8 @@
  *         \$text = '%items% results';
  *       }";
  *
+ * changehistory
+ * #C3-It is adding a new feature to admin section BulkUpload. In this file keywords and their values related to that fea * ture were added.
  **********************************************************************************
  */
 
@@ -42,12 +44,22 @@ $trans["adminCancel"]              = "\$text = 'Cancel';";
 $trans["adminDelete"]              = "\$text = 'Delete';";
 $trans["adminUpdate"]              = "\$text = 'Update';";
 $trans["adminFootnote"]            = "\$text = 'Fields marked with %symbol% are required.';";
-
+#*********************************************************************************
+#*  Common translation text shared among page adminBulkUpload_list.php
+#*********************************************************************************
+//#C3 - Begin
+$trans["adminBulkUpload_list"]  = "\$text = 'BulkUpload';";
+$trans["adminBulkUpload_list_Bulk_upload_of_new_bibliographies"] = "\$text = 'Bulk upload of new bibliographies';";
+$trans["adminBulkUpload_list_date"] ="\$text ='Date:';";
+$trans["adminBulkUpload_list_file"] ="\$text =' Excel file:';";
+$trans["adminBulkUpload_list_format_of_file_to_be_uploaded"] ="\$text ='Format of file to be uploaded:';";
+$trans["adminBulkUpload_succesful"] ="\$text ='Uploaded Successfully:';";
+//#C3 - End
 #****************************************************************************
 #*  Translation text for page index.php
 #****************************************************************************
-$trans["indexHdr"]                 = "\$text = 'Admin';";
-$trans["indexDesc"]                = "\$text = 'Use the functions located in the left hand navigation area to manage your library\'s staff and administrative records.';";
+$trans["indexHdr"]   = "\$text = 'Admin';";
+$trans["indexDesc"]  = "\$text = 'Use the functions located in the left hand navigation area to manage your library\'s staff and administrative records.';";
 
 #****************************************************************************
 #*  Translation text for page collections*.php
