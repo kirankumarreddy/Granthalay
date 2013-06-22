@@ -14,6 +14,15 @@
  * @access public
  ******************************************************************************
  */
+ 
+ /******************************************************************************
+ *                  CHANGE HISTORY
+ *    #C6 - its a feature for bulk upload of members into library system in admin section
+ *
+ *    @author Kiran Kumar Reddy and Bogade Saiteja 
+ * 
+ ******************************************************************************
+ */
 class Member {
   var $_mbrid = 0;
   var $_barcodeNmbr = 0;
@@ -26,6 +35,14 @@ class Member {
   var $_lastName = "";
   var $_lastNameError = "";
   var $_firstName = "";
+  // #C6 - begin
+  var $_schoolName ="";
+  var $_standard ="";
+  var $_rollNo ="";
+  var $_parentName ="";
+  var $_parentOccupation ="";
+  var $_motherTongue ="";
+  // #C6 - end
   var $_firstNameError = "";
   var $_email = "";
   var $_address = "";
@@ -106,9 +123,27 @@ class Member {
   function getFirstName() {
     return $this->_firstName;
   }
-  function getFirstNameError() {
-    return $this->_firstNameError;
+  // #C6 - begin
+  function getsSchoolName() {
+    return $this->_schoolName;
   }
+  function getStandard() {
+    return $this->_standard;
+  }
+  
+  function getRollNo() {
+    return $this->_rollNo;
+  }
+  function getParentName() {
+    return $this->_parentName;
+  }
+  function getParentOccupation() {
+    return $this->_parentOccupation;
+  }
+  function getMotherTongue() {
+    return $this->_motherTongue;
+  }
+  // #C6 - end
   function getFirstLastName() {
     return $this->_firstName." ".$this->_lastName;
   }
@@ -165,6 +200,26 @@ class Member {
   function setFirstName($value) {
     $this->_firstName = trim($value);
   }
+  // # C5 - begin
+   function setSchoolName($value) {
+    $this->_schoolName = trim($value);
+  }
+   function setStandard($value) {
+    $this->_standard = trim($value);
+  }
+   function setRollNo($value) {
+    $this->_rollNo = trim($value);
+  }
+   function setParentName($value) {
+    $this->_parentName = trim($value);
+  }
+   function setParentOccupation($value) {
+    $this->_parentOccupation = trim($value);
+  }
+   function setMotherTongue($value) {
+    $this->_motherTongue = trim($value);
+  }
+  // #C6- end
   function setFirstNameError($value) {
     $this->_firstNameError = trim($value);
   }

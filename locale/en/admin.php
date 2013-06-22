@@ -30,10 +30,15 @@
  *       } else {
  *         \$text = '%items% results';
  *       }";
+ ***********************************************************************************************************
+ *                   CHANGE HISTORY
  *
- * changehistory
- * #C3-It is adding a new feature to admin section BulkUpload. In this file keywords and their values related to that fea * ture were added.
- **********************************************************************************
+ *  #C3-It is adding a new feature to admin section BulkUpload. In this file keywords and their values related to that fea * ture * were added.
+ *
+ *  #C6 - its a feature for bulk upload of members into library system in admin section
+ *
+ *    author - Kiran Kumar Reddy and Bogade Saiteja 
+ *************************************************************************************************************
  */
 
 #****************************************************************************
@@ -55,6 +60,18 @@ $trans["adminBulkUpload_list_file"] ="\$text =' Excel file:';";
 $trans["adminBulkUpload_list_format_of_file_to_be_uploaded"] ="\$text ='Format of file to be uploaded:';";
 $trans["adminBulkUpload_succesful"] ="\$text ='Uploaded Successfully:';";
 //#C3 - End
+
+#*********************************************************************************
+#*  Common translation text shared among page adminmemberBulkUpload_list.php
+#*********************************************************************************
+//#C6 - Begin
+$trans["adminmemberBulkUpload_list"]  = "\$text = 'Member BulkUpload';";
+$trans["adminmemberBulkUpload_list_Bulk_upload_of_new_members"] = "\$text = 'Bulk upload of new Members';";
+$trans["adminmemberBulkUpload_list_date"] ="\$text ='Date:';";
+$trans["adminmemberBulkUpload_list_file"] ="\$text =' Excel file:';";
+$trans["adminmemberBulkUpload_list_format_of_file_to_be_uploaded"] ="\$text ='Format of file to be uploaded:';";
+$trans["adminmemberBulkUpload_succesful"] ="\$text ='Uploaded Successfully:';";
+//#C6 - End
 #****************************************************************************
 #*  Translation text for page index.php
 #****************************************************************************
