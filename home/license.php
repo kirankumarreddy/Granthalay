@@ -351,6 +351,5 @@ library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 </pre>
 
-//Added Karthikeya changes to test merge process in Github
 
 <?php include("../shared/footer.php"); ?>
