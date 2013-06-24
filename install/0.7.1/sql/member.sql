@@ -8,6 +8,12 @@ create table %prfx%member (
   ,last_name varchar(50) not null
   ,first_name varchar(50) not null
   ,address text null
+  ,school_name varchar(50) null
+  ,standard varchar(10) null
+  ,Roll_no varchar(20) null
+  ,parent_name varchar(50) null
+  ,parent_occupation varchar(50) null
+  ,mother_tongue varchar(20) null
   ,home_phone varchar(15) null
   ,work_phone varchar(15) null
   ,email varchar(128) null
