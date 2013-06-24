@@ -30,8 +30,15 @@
  *       } else {
  *         \$text = '%items% results';
  *       }";
- * #C3- It is the change related to bulkupload feature in admin section.Here keyword and value related to bulkupload optio * n on the left side(list) is added.)  
- **********************************************************************************
+ *********************************************************************************************
+ *                     CHANGE HISTORY
+ *
+ * #C3- It is the change related to bulkupload feature in admin section.Here keyword and value related to bulkupload optio * n on the left side(list) is added.)
+ *
+ *  #C6 - its a feature for bulk upload of members into library system in admin section
+ *
+ *    Author - Kiran kumar Reddy and Bogade Saiteja    
+ **********************************************************************************************
  */
 
 #****************************************************************************
@@ -52,14 +59,18 @@ $trans["homeLicenseLink"]          = "\$text = 'License';";
 #****************************************************************************
 $trans["adminSummary"]             = "\$text = 'Admin Summary';";
 $trans["adminStaff"]               = "\$text = 'Staff Admin';";
-$trans["adminSettings"]            = "\$text = 'Library Settings';";
-$trans["adminMaterialTypes"]       = "\$text = 'Material Types';";
-$trans["adminCollections"]         = "\$text = 'Collections';";
-$trans["adminThemes"]              = "\$text = 'Themes';";
-$trans["adminTranslation"]         = "\$text = 'Translation';";
+$trans["adminSettings"]             = "\$text = 'Library Settings';";
+$trans["adminMaterialTypes"]        = "\$text = 'Material Types';";
+$trans["adminCollections"]          = "\$text = 'Collections';";
+$trans["adminThemes"]               = "\$text = 'Themes';";
+$trans["adminTranslation"]          = "\$text = 'Translation';";
 #C3 -begin
-$trans["adminBulkUpload"]          = "\$text = 'Bulk Upload';";
+$trans["adminBulkUpload"]           = "\$text = 'Bulk Upload';";
 #C3 -end
+#C6 -begin
+$trans["adminmemberBulkUpload"]      = "\$text = 'Member Bulk Upload';";
+#C6 -end
+
 #****************************************************************************
 #*  Translation text for page cataloging.php
 #****************************************************************************
@@ -109,3 +120,4 @@ $trans["memberSearch"]= "\$text = 'Member Search';";
 $trans["newMember"]= "\$text = 'New Member';";
 //$trans["account"]        	= "\$text = 'Account';";
 ?>
+  
