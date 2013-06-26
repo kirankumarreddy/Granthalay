@@ -25,17 +25,22 @@ function import()	{
 }
 
 function insertMember($data) {
-    $bar = mysql_fetch_array(mysql_query("select max(barcode_nmbr)+1 as max from member"));
- 	$sql  = "INSERT INTO member(barcode_nmbr, first_name, last_name, school_name, standard, roll_no, parent_name," ;
-	$sql .= "parent_occupation, mother_tongue, create_dt, last_change_dt, last_change_userid) ";
-	$sql .= " VALUES ('" . $bar['max'] . "','" . $data[0]  . "','" . $data[1] .  "','"  ;    
+ 	$sql  = "INSERT INTO member(first_name, last_name, school_name, standard, roll_no, parent_name," ;
+	$sql .= "parent_occupation, mother_tongue, create_dt, last_change_dt, last_change_userid, classification) ";
+	$sql .= " VALUES ('" . $data[0]  . "','" . $data[1] .  "','"  ;    
 	$sql .= str_replace("'","\'",$data[2]) .  "','" . $data[3] .  "','" . $data[4] .  "','" . $data[5] . "','";
 	$sql .= str_replace("'","\'",$data[6]) . "','" . $data[7] . "','" . date("Y-m-d H:i:s") . "','" . date("Y-m-d H:i:s") . "','";
-	$sql .= 995 . "')";
+	$sql .= 995 . "','" . 3 . "')";
    	$qShowStatusResult = $this->_act($sql);
-	if ($qShowStatusResult==true)
-  		return $this->getInsertID();
-	else
+	if ($qShowStatusResult==true)	{
+		$thisid = $this->getInsertID();
+		$sql = "UPDATE member set barcode_nmbr = mbrid where mbrid = " . $thisid;
+		$qShowStatusResult = $this->_act($sql);
+		if ($qShowStatusResult==true)	
+			return $thisid;
+		else
+			return 0;
+	} else
 		return 0;	
 }
 /**

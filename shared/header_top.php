@@ -59,7 +59,7 @@ function backToMain(URL) {
 <!-- **************************************************************************************
      * Library Name and hours
      **************************************************************************************-->
-<table class="primary" width="100%" cellpadding="0" cellspacing="0" border="0">
+<table class="primary"  width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr bgcolor="<?php echo H(OBIB_TITLE_BG);?>">
     <td width="100%" class="title" valign="top">
        <?php
@@ -74,16 +74,16 @@ function backToMain(URL) {
     <td valign="top">
       <table class="primary" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td class="title" nowrap="yes"><font class="small"><?php echo $headerLoc->getText("headerTodaysDate"); ?></font></td>
-          <td class="title" nowrap="yes"><font class="small"><?php echo H(date($headerLoc->getText("headerDateFormat")));?></font></td>
+          <td class="title" nowrap="yes"><font class="large"><?php echo $headerLoc->getText("headerTodaysDate"); ?></font></td>
+          <td class="title" nowrap="yes"><font class="large"><?php echo H(date($headerLoc->getText("headerDateFormat")));?></font></td>
         </tr>
         <tr>
-          <td class="title" nowrap="yes"><font class="small"><?php if (OBIB_LIBRARY_HOURS != "") echo $headerLoc->getText("headerLibraryHours");?></font></td>
-          <td class="title" nowrap="yes"><font class="small"><?php if (OBIB_LIBRARY_HOURS != "") echo H(OBIB_LIBRARY_HOURS);?></font></td>
+          <td class="title" nowrap="yes"><font class="large"><?php if (OBIB_LIBRARY_HOURS != "") echo $headerLoc->getText("headerLibraryHours");?></font></td>
+          <td class="title" nowrap="yes"><font class="large"><?php if (OBIB_LIBRARY_HOURS != "") echo H(OBIB_LIBRARY_HOURS);?></font></td>
         </tr>
         <tr>
-          <td class="title" nowrap="yes"><font class="small"><?php if (OBIB_LIBRARY_PHONE != "") echo $headerLoc->getText("headerLibraryPhone");?></font></td>
-          <td class="title" nowrap="yes"><font class="small"><?php if (OBIB_LIBRARY_PHONE != "") echo H(OBIB_LIBRARY_PHONE);?></font></td>
+          <td class="title" nowrap="yes"><font class="large"><?php if (OBIB_LIBRARY_PHONE != "") echo $headerLoc->getText("headerLibraryPhone");?></font></td>
+          <td class="title" nowrap="yes"><font class="large"><?php if (OBIB_LIBRARY_PHONE != "") echo H(OBIB_LIBRARY_PHONE);?></font></td>
         </tr>
       </table>
     </td>

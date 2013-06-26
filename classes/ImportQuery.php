@@ -25,7 +25,7 @@ function import()	{
 function insertBiblio($data) {
  
  	$sql  = "INSERT INTO biblio(create_dt, last_change_dt, last_change_userid, collection_cd, material_cd, title, author, reading_level) ";
-	$sql .= " VALUES ('" . date("Y-m-d H:i:s") . "','" . date("Y-m-d H:i:s")  . "','" . 995 .  "','"  . 13 .  "','" .  2 .  "','" . str_replace("'","\'",$data[1]) .  "','" . str_replace("'","\'", $data[2]) . "','";
+	$sql .= " VALUES ('" . date("Y-m-d H:i:s") . "','" . date("Y-m-d H:i:s")  . "','" . 995 .  "','"  . 13 .  "','" .  2 .  "','" . $data[1] .  "','" . $data[2] . "','";
 	$sql .= $data[4] . "')";
    	$qShowStatusResult = $this->_act($sql);
 	if ($qShowStatusResult==true)
@@ -40,7 +40,6 @@ function insertBiblio($data) {
  */
 function alreadyInDB($title) {
  	$sql  = "select bibid from biblio where strcmp(title,'" .$title . "')=0";
-	echo $sql."<br />";
  	$qShowStatusResult = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($qShowStatusResult);
 	if ($row == 0)
@@ -66,9 +65,9 @@ function alreadyInDB($title) {
  */
 function insertBiblioCopy($data, $lastInsertID) {
 	
-	$sql  = "INSERT INTO biblio_copy (create_dt, bibid, barcode_nmbr, status_cd, status_begin_dt, basket_nmbr) VALUES ( ";
+	$sql  = "INSERT INTO biblio_copy (create_dt, bibid, barcode_nmbr, status_cd, status_begin_dt, basket_nmbr,copy_desc) VALUES ( ";
 	$sql .= "'" . date("Y-m-d H:i:s") . "','" . $lastInsertID .  "','" . $data[0] . "','" . $data[3] . "','" . date("Y-m-d H:i:s") . "','";
-	$sql .= $data[5]. "' ) " ;
+	$sql .= $data[5]. "','" .$data[6]. "' ) " ;
   	$r = $this->_act($sql);
  	return $r;
 }
