@@ -34,8 +34,9 @@
   	 $rowcount = 0;
 	 $b = array();
      while(count($lines)) {
-      $columns = explode(",",trim(array_shift($lines)));
-	  if ($columns[0]=='firstName') {
+      //$columns = explode(",",trim(array_shift($lines)));
+      $columns = str_getcsv(array_shift($lines), ",", "\"");
+	  if ($columns[0]=='FirstName') {
 			continue;
 	  }
 	  $rowcount++;
@@ -43,16 +44,20 @@
 		  	//add title to an array
 			$b[$rowcount]="Record " . $rowcount . " first name not entered.";
 			continue;
+	  } else {
+	  	 $columns[0] = str_replace("'","\'",$columns[0]);
 	  }
 	  if (strlen(trim($columns[1]))==0) {
 			$b[$rowcount]="Record " . $rowcount . " last name not entered.";
 			continue;
+	  } else {
+	  	 $columns[1] = str_replace("'","\'",$columns[1]);
 	  }
 	  if (strlen(trim($columns[2]))==0) {
 			$b[$rowcount]="Record " . $rowcount . " school name  not entered.";
 			continue;
 	  }
-	   if (strlen(trim($columns[3]))==0) {
+	  if (strlen(trim($columns[3]))==0) {
 			$b[$rowcount]="Record " . $rowcount . " standard not entered.";
 			continue;
 	  }
@@ -63,9 +68,11 @@
 	   if (strlen(trim($columns[5]))==0) {
 			$b[$rowcount]="Record " . $rowcount . " parent name  not entered.";
 			continue;
+	  } else {
+	  	 $columns[5] = str_replace("'","\'",$columns[5]);
 	  }
 	  $import = new MemberImportQuery();
-	  $mbrid = $import->alreadyInDB(str_replace("'","\'",$columns[0]), str_replace("'","\'",$columns[1]), str_replace("'","\'",$columns[5]));
+	  $mbrid = $import->alreadyInDB($columns[0], $columns[1], $columns[5]);
 	  if ($mbrid==0) {
  		  $lastinsertid = $import->insertMember($columns);
 		  if ($lastinsertid==0) {

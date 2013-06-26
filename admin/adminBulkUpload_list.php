@@ -34,20 +34,27 @@
   	 $rowcount = 0;
 	 $b = array();
      while(count($lines)) {
-      $columns = explode(",",trim(array_shift($lines)));
-	  if ($columns[0]=='Barcode number') {
+      //$columns = explode(",",trim(array_shift($lines)));
+      $columns = str_getcsv(array_shift($lines), ",", "\"");
+  
+	  if ($columns[0]=='S No') {
 			continue;
 	  }
 	  $rowcount++;
 	  if (strlen(trim($columns[0]))==0) {
 		  	//add title to an array
-			$b[$rowcount]="Record " . $rowcount . " Barcode not entered.";
+			$b[$rowcount]="Record " . $rowcount . " Barcode/Serial No not entered.";
 			continue;
 	  }
 	  if (strlen(trim($columns[1]))==0) {
 			$b[$rowcount]="Record " . $rowcount . " Title not entered.";
 			continue;
+	  } else {
+	  	 $columns[1] = str_replace("'","\'",$columns[1]);
 	  }
+	  
+	  $columns[2] = str_replace("'","\'",$columns[2]);
+	  
 	  if (strlen(trim($columns[3]))==0) {
 	  		$columns[3] = "in";
  	  }
@@ -68,9 +75,12 @@
 			$b[$rowcount]="Record " . $rowcount . " Basket not entered.";
 			continue;
 	  }
-	  
+	  if (strlen(trim($columns[6]))==0) {
+			$columns[6] = ' ';
+	  }
+	   
 	  $import = new ImportQuery();
-	  $bibid = $import->alreadyInDB(str_replace("'","\'",$columns[1]));
+	  $bibid = $import->alreadyInDB($columns[1]);
 	  if ($bibid==0) {
  		  $lastinsertid = $import->insertBiblio($columns);
 		  if ($lastinsertid==0) {
@@ -78,7 +88,6 @@
 			$b[$rowcount]="Record " . $rowcount . " Unknown error.";
 			continue;
 		  }
-		  
 		  $import->insertBiblioCopy($columns,$lastinsertid);
 	  } else{
 	  	  $import->insertBiblioCopy($columns,$bibid);
