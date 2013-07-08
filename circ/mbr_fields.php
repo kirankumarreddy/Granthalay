@@ -15,6 +15,15 @@
     "mbrFldsCardNmbr" => inputField('text', "barcodeNmbr", $mbr->getBarcodeNmbr()),
     "mbrFldsLastName" => inputField('text', "lastName", $mbr->getLastName()),
     "mbrFldsFirstName" => inputField('text', "firstName", $mbr->getFirstName()),
+
+    "mbrFldsGender" => inputField('text', "gender", $mbr->getGender()),
+    "mbrFldsSchool" => inputField('text', "school", $mbr->getSchoolId()),
+    "mbrFldsStandard" => inputField('text', "standard", $mbr->getStandard()),
+    "mbrFldsSchoolTeacher" => inputField('text', "schoolTeacher", $mbr->getSchoolTeacher()),
+    "mbrFldsParentName" => inputField('text', "parentname", $mbr->getParentName()),
+    "mbrFldsParentOccupation" => inputField('text', "parentoccupation", $mbr->getParentOccupation()),
+    "mbrFldsMotherTongue" => inputField('text', "mothertongue", $mbr->getMotherTongue()),
+
     "mbrFldsEmail" => inputField('text', "email", $mbr->getEmail()),
     "Mailing Address:" => inputField('textarea', "address", $mbr->getAddress()),
     "mbrFldsHomePhone" => inputField('text', "homePhone", $mbr->getHomePhone()),

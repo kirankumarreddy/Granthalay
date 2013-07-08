@@ -19,7 +19,7 @@
  *                  CHANGE HISTORY
  *    #C6 - its a feature for bulk upload of members into library system in admin section
  *
- *    @author Kiran Kumar Reddy and Bogade Saiteja 
+ *    @author Karthikeya, Kiran Kumar Reddy and Bogade Saiteja
  * 
  ******************************************************************************
  */
@@ -36,12 +36,14 @@ class Member {
   var $_lastNameError = "";
   var $_firstName = "";
   // #C6 - begin
-  var $_schoolName ="";
+  var $_schoolId ="";
   var $_standard ="";
   var $_rollNo ="";
   var $_parentName ="";
   var $_parentOccupation ="";
   var $_motherTongue ="";
+  var $_gender="";
+  var $_schoolTeacher="";
   // #C6 - end
   var $_firstNameError = "";
   var $_email = "";
@@ -124,9 +126,14 @@ class Member {
     return $this->_firstName;
   }
   // #C6 - begin
-  function getsSchoolName() {
-    return $this->_schoolName;
+  function getSchoolId() {
+    return $this->_schoolId;
   }
+  
+  function getGender(){
+    return $this->_gender;
+  }
+  
   function getStandard() {
     return $this->_standard;
   }
@@ -142,6 +149,9 @@ class Member {
   }
   function getMotherTongue() {
     return $this->_motherTongue;
+  }
+  function getSchoolTeacher(){
+    return $this->_schoolTeacher;
   }
   // #C6 - end
   function getFirstLastName() {
@@ -201,11 +211,18 @@ class Member {
     $this->_firstName = trim($value);
   }
   // # C5 - begin
-   function setSchoolName($value) {
-    $this->_schoolName = trim($value);
+   function setSchoolId($value) {
+    $this->_schoolId = trim($value);
+  }
+  function setGender($value)
+  {
+    $this->_gender = trim($value);  	
   }
    function setStandard($value) {
     $this->_standard = trim($value);
+  }
+   function setSchoolTeacher(){
+    $this->_schoolTeacher = trim($value);  	
   }
    function setRollNo($value) {
     $this->_rollNo = trim($value);

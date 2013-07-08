@@ -63,6 +63,17 @@ $trans["mbrFldsHeader"]           = "\$text='Member:';";
 $trans["mbrFldsCardNmbr"]         = "\$text='Card Number:';";
 $trans["mbrFldsLastName"]         = "\$text='Last Name:';";
 $trans["mbrFldsFirstName"]        = "\$text='First Name:';";
+
+$trans["mbrFldsGender"]        = "\$text='Gender:';";
+$trans["mbrFldsSchool"]        = "\$text='School:';";
+$trans["mbrFldsSchoolTeacher"]        = "\$text='School Teacher:';";
+$trans["mbrFldsStandard"]      = "\$text='Standard:';";
+
+$trans["mbrFldsParentName"]        = "\$text='Parent Name:';";
+$trans["mbrFldsParentOccupation"]  = "\$text='Parent Occupation:';";
+$trans["mbrFldsMotherTongue"]        = "\$text='Mother Tongue:';";
+
+
 $trans["mbrFldsAddr1"]            = "\$text='Address Line 1:';";
 $trans["mbrFldsAddr2"]            = "\$text='Address Line 2:';";
 $trans["mbrFldsCity"]             = "\$text='City:';";
@@ -71,8 +82,6 @@ $trans["mbrFldsHomePhone"]        = "\$text='Home Phone:';";
 $trans["mbrFldsWorkPhone"]        = "\$text='Work Phone:';";
 $trans["mbrFldsEmail"]            = "\$text='Email Address:';";
 $trans["mbrFldsClassify"]         = "\$text='Classification:';";
-$trans["mbrFldsGrade"]            = "\$text='School Grade:';";
-$trans["mbrFldsTeacher"]          = "\$text='School Teacher:';";
 $trans["mbrFldsSubmit"]           = "\$text='Submit';";
 $trans["mbrFldsCancel"]           = "\$text='Cancel';";
 $trans["mbrsearchResult"]         = "\$text='Result Pages: ';";
@@ -106,8 +115,14 @@ $trans["mbrViewPhone"]            = "\$text='Phone:';";
 $trans["mbrViewPhoneHome"]        = "\$text='H:';";
 $trans["mbrViewPhoneWork"]        = "\$text='W:';";
 $trans["mbrViewEmail"]            = "\$text='Email Address:';";
-$trans["mbrViewGrade"]            = "\$text='School Grade:';";
-$trans["mbrViewTeacher"]          = "\$text='School Teacher:';";
+
+$trans["mbrViewParentName"]        = "\$text='Parent Name:';";
+$trans["mbrViewSchool"]            = "\$text='School:';";
+$trans["mbrViewSchoolTeacher"]     = "\$text='School Teacher:';";
+$trans["mbrViewGender"]            = "\$text='Gender:';";
+$trans["mbrViewParentOccupation"]  = "\$text='Parent Occupation:';";
+$trans["mbrViewMotherTongue"]      = "\$text='Mother Tongue:';";
+
 $trans["mbrViewHead2"]            = "\$text='Checkout Stats:';";
 $trans["mbrViewStatColHdr1"]      = "\$text='Material';";
 $trans["mbrViewStatColHdr2"]      = "\$text='Count';";

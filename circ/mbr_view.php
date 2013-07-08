@@ -150,6 +150,57 @@
       <?php echo H($mbr->getEmail());?>
     </td>
   </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewGender"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getGender());?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewSchool"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getSchoolId());?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewSchoolTeacher"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getSchoolTeacher());?>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewParentName"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getParentName());?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewParentOccupation"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getParentOccupation());?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewMotherTongue"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getMotherTongue());?>
+    </td>
+  </tr>
+
+
 <?php
   foreach ($memberFieldsDm as $name => $title) {
     if (($value = $mbr->getCustom($name))) {

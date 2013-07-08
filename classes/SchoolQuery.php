@@ -4,18 +4,18 @@
  */
  
 require_once("../shared/global_constants.php");
-require_once("../classes/Member.php");
+require_once("../classes/School.php");
 require_once("../classes/Query.php");
 
 /******************************************************************************
- * MemberQuery data access component for library members
+ * SchoolQuery data access component for library members
  *
- * @author David Stevens <dave@stevens.name>;
+ * @author 
  * @version 1.0
  * @access public
  ******************************************************************************
  */
-class MemberQuery extends Query {
+class SchoolQuery extends Query {
   var $_itemsPerPage = 1;
   var $_rowNmbr = 0;
   var $_currentRowNmbr = 0;
@@ -137,15 +137,8 @@ class MemberQuery extends Query {
     if (isset($array["username"])) {
       $mbr->setLastChangeUsername($array["username"]);
     }
-
-    $mbr->setGender($array["gender"]);
-    $mbr->setSchoolId($array["school"]);
-    $mbr->setParentName($array["parentname"]);
-    $mbr->setParentOccupation($array["parentoccupation"]);
-    $mbr->setMotherTongue($array["mothertongue"]);
-    $mbr->setStandard($array["standard"]);
-    $mbr->setSchoolTeacher($array["schoolTeacher"]);
-
+	$mbr->setGender($array["gender"]);
+	$mbr->setSchoolId($array["school_id"]);
     $mbr->setLastName($array["last_name"]);
     $mbr->setFirstName($array["first_name"]);
     $mbr->setAddress($array["address"]);
@@ -216,17 +209,17 @@ class MemberQuery extends Query {
                         . "(mbrid, barcode_nmbr, create_dt, last_change_dt, "
                         . " last_change_userid, last_name, first_name, address, schoolid ,"
                         . " standard, roll_no, parent_name, parent_occupation, mother_tongue, "
-						. " home_phone, work_phone, email, classification, gender, school_teacher) "
+						. " home_phone, work_phone, email, classification) "
                         . "values (null, %Q, sysdate(), sysdate(), %N, "
-                        . " %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q) ",
+                        . " %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q) ",
                         $mbr->getBarcodeNmbr(), $mbr->getLastChangeUserid(),
                         $mbr->getLastName(), $mbr->getFirstName(),
                         $mbr->getAddress(), $mbr->getSchoolId() ,
-			$mbr->getStandard(),$mbr->getRollNo(),
-			$mbr->getParentName(),$mbr->getParentOccupation(),
-			$mbr->getMotherTongue(),$mbr->getHomePhone(),
+						$mbr->getStandard(),$mbr->getRollNo(),
+						$mbr->getParentName(),$mbr->getParentOccupation(),
+						$mbr->getMotherTongue(),$mbr->getHomePhone(),
                         $mbr->getWorkPhone(), $mbr->getEmail(),
-                        $mbr->getClassification(),$mbr->getGender()$mbr->getSchoolTeacher());
+                        $mbr->getClassification());
 
     $this->exec($sql);
     $mbrid = $this->_conn->getInsertId();
@@ -247,7 +240,7 @@ class MemberQuery extends Query {
 						. " schoolid=%Q , standard=%Q , roll_no=%Q , parent_name=%Q ,"
 						. " parent_occupation=%Q , mother_tongue=%Q ,"
                         . " home_phone=%Q, work_phone=%Q,"
-                        . " email=%Q, classification=%Q, gender=%Q, school_teacher=%Q "
+                        . " email=%Q, classification=%Q "
                         . "where mbrid=%N",
                         $mbr->getLastChangeUserid(), $mbr->getBarcodeNmbr(),
                         $mbr->getLastName(), $mbr->getFirstName(),
@@ -256,7 +249,7 @@ class MemberQuery extends Query {
 						$mbr->getParentName(),$mbr->getParentOccupation(),
 						$mbr->getMotherTongue(), $mbr->getHomePhone(),
                         $mbr->getWorkPhone(), $mbr->getEmail(),
-                        $mbr->getClassification(),$mbr->getGender()$mbr->getSchoolTeacher(),$mbr->getMbrid());
+                        $mbr->getClassification(), $mbr->getMbrid());
 
     $this->exec($sql);
     $this->setCustomFields($mbr->getMbrid(), $mbr->_custom);
