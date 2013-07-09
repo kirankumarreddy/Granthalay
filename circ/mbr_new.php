@@ -81,7 +81,6 @@
   
   $validData = $mbr->validateData();
   if (!$validData) {
-    $pageErrors["barcodeNmbr"] = $mbr->getBarcodeNmbrError();
     $pageErrors["lastName"] = $mbr->getLastNameError();
     $pageErrors["firstName"] = $mbr->getFirstNameError();
     $_SESSION["postVars"] = $_POST;
@@ -104,6 +103,19 @@
     exit();
   }
 
+  
+  #**************************************************************************
+  #*  Check for  maximum Roll number
+  #**************************************************************************
+  $mbrQ = new MemberQuery();
+  $mbrQ->connect();
+  $rollNumberList = $mbrQ->getMaxRollNumber($mbr->getSchoolId(), $mbr->getStandard());
+  $rollNumber=($rollNumberList[0]['max'])+1;
+  $mbr->setRollNo($rollNumber);
+  $roll=$mbrQ->leading_zeros($rollNumber, 3);
+  $schoolcode= $mbrQ->getSchoolCode($mbr->getSchoolId());
+  $mbr->setBarcodeNmbr($schoolcode."".$roll);
+  $_POST["barcodeNmbr"] = $mbr->getBarcodeNmbr();
   #**************************************************************************
   #*  Insert new library member
   #**************************************************************************

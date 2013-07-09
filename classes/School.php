@@ -25,7 +25,7 @@
  */
 class School {
   var $_schoolid = 0;
-  var $_schoolName = 0;
+  var $_schoolName = "";
   var $_schoolNameError="";
   var $_schoolCodeError="";
   var $_schoolAddressError="";
@@ -36,6 +36,7 @@ class School {
   var $_schoolAddress = "";
   var $_contactPerson = "";
   var $_contactNumber = "";
+  var $_email="";
   
 
   /****************************************************************************
@@ -49,28 +50,9 @@ class School {
       $valid = false;
       $this->_schoolNameError = "School Name is required.";
     }
-	
-    if ($this->_schoolCode == "") {
-      $valid = false;
-      $this->_schoolCodeError = "School Code is required.";
-    }
-    if ($this->_schoolAddress == "") {
-      $valid = false;
-      $this->_schoolAddressError = "School Address is required.";
-    }
-
     return $valid;
   }
   
-  function getCustom($field) {
-    if (isset($this->_custom[$field])) {
-      return $this->_custom[$field];
-    }
-    return "";
-  }
-  function setCustom($field, $value) {
-    $this->_custom[$field] = $value;
-  }
 
   /****************************************************************************
    * Getter methods for all fields
@@ -117,6 +99,10 @@ class School {
 
   function getContactNumber() {
     return $this->_contactNumber;
+  }
+  
+  function getEmail(){
+    return $this->_email;
   }
   
   /****************************************************************************
@@ -168,6 +154,11 @@ class School {
   function setContactNumber($value) {
     $this->_contactNumber = trim($value);
   }
+  
+  function setEmail($value) {
+  	$this->_email = trim($value);
+  }
+  
 }
 
 ?>

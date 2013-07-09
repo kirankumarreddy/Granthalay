@@ -116,8 +116,15 @@ $trans["editInfo"]="\$text = 'Edit Info';";
 $trans["checkoutHistory"]= "\$text = 'Checkout History';";
 $trans["account"]="\$text = 'Account';";
 $trans["checkIn"]="\$text = 'Check In';";
-$trans["memberSearch"]= "\$text = 'Member Search';";
 $trans["newMember"]= "\$text = 'New Member';";
+
+
+$trans["schoolInfo"]="\$text = 'School Info';";
+$trans["editInfo"]="\$text = 'Edit Info';";
+$trans["schoolDelete"]="\$text = 'Delete';";
+$trans["schoolSearch"]= "\$text = 'School Search';";
+$trans["newSchool"]= "\$text = 'New School';";
+
 //$trans["account"]        	= "\$text = 'Account';";
 ?>
   

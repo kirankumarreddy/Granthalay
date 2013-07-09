@@ -2,7 +2,7 @@ drop table if exists %prfx%school;
 create table %prfx%school (
   schoolid integer auto_increment primary key
   ,school_name text not null
-  ,school_code varchar(10) not null
+  ,school_code int(3) zerofill null
   ,create_dt datetime not null
   ,last_change_dt datetime not null
   ,last_change_userid integer not null

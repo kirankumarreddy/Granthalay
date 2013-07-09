@@ -54,6 +54,16 @@ $trans["indexNameHdr"]            = "\$text='Search Member by Last Name:';";
 $trans["indexName"]               = "\$text='Last name start with:';";
 
 #****************************************************************************
+#*  Translation text for page index.php
+#****************************************************************************
+$trans["sclIndexHeading"]            = "\$text='School';";
+$trans["sclCodeSearch"]            = "\$text='Search School by School Code:';";
+$trans["sclCode"]               	= "\$text='School Code:';";
+$trans["sclIndexSearch"]             = "\$text='Search';";
+$trans["sclSearchName"]            = "\$text='Search School by School Name:';";
+$trans["sclName"]               = "\$text='School Name:';";
+
+#****************************************************************************
 #*  Translation text for page mbr_new_form.php, mbr_edit_form.php and mbr_fields.php
 #****************************************************************************
 $trans["Mailing Address:"] = "\$text='Mailing Address:';";
@@ -92,6 +102,55 @@ $trans["mbrsearchFoundResults"]   = "\$text=' results found.';";
 $trans["mbrsearchSearchResults"]  = "\$text='Search Results:';";
 $trans["mbrsearchCardNumber"]     = "\$text='Card Number:';";
 $trans["mbrsearchClassification"] = "\$text='Classification:';";
+
+
+#****************************************************************************
+#*  Translation text for page scl_new_form.php, scl_edit_form.php and scl_fields.php
+#****************************************************************************
+
+$trans["sclNewForm"]              = "\$text='Add New';";
+$trans["sclEditForm"]             = "\$text='Edit';";
+$trans["sclFldsHeader"]           = "\$text='School:';";
+
+$trans["sclFldsSchoolName"]       = "\$text='School Name:';";
+$trans["sclFldsSchoolCode"]  	  = "\$text='School Code:';";
+$trans["sclFldsAddress"]          = "\$text='School Address:';";
+$trans["sclFldsContactPerson"]    = "\$text='Contact Person:';";
+$trans["sclFldsContactNumber"]    = "\$text='Contact Number:';";
+$trans["sclFldsEmail"]            = "\$text='Email :';";
+$trans["sclFldsSubmit"]           = "\$text='Submit';";
+$trans["sclFldsCancel"]           = "\$text='Cancel';";
+$trans["sclsearchResult"]         = "\$text='Result Pages: ';";
+$trans["sclsearchprev"]           = "\$text='prev';";
+$trans["sclsearchnext"]           = "\$text='next';";
+$trans["sclsearchNoResults"]      = "\$text='No results found.';";
+$trans["sclsearchFoundResults"]   = "\$text='results found.';";
+$trans["sclsearchSearchResults"]  = "\$text='Search Results:';";
+$trans["sclInformation"]          = "\$text='School Information:';";
+#****************************************************************************
+#*  Translation text for page scl_new.php
+#****************************************************************************
+$trans["sclNewSuccess"]           = "\$text='School has been successfully added.';";
+
+#****************************************************************************
+#*  Translation text for page scl_edit.php
+#****************************************************************************
+$trans["sclEditSuccess"]          = "\$text='School has been successfully updated.';";
+
+#****************************************************************************
+#*  Translation text for page scl_del_confirm.php
+#****************************************************************************
+$trans["sclDelConfirmWarn"]       = "\$text = 'The School has checkout(s).  All checked out materials must be checked in before deleting this school.';";
+$trans["sclDelConfirmReturn"]     = "\$text = 'return to school information';";
+$trans["sclDelConfirmMsg"]        = "\$text = 'Are you sure you want to delete the school, %name%?  ';";
+
+#****************************************************************************
+#*  Translation text for page scl_del.php
+#****************************************************************************
+$trans["sclDelSuccess"]           = "\$text='School, %name%, has been deleted.';";
+$trans["sclDelReturn"]            = "\$text='return to School Search';";
+
+
 
 #****************************************************************************
 #*  Translation text for page mbr_new.php

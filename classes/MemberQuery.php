@@ -6,6 +6,9 @@
 require_once("../shared/global_constants.php");
 require_once("../classes/Member.php");
 require_once("../classes/Query.php");
+require_once("../classes/School.php");
+require_once("../classes/SchoolQuery.php");
+
 
 /******************************************************************************
  * MemberQuery data access component for library members
@@ -139,12 +142,12 @@ class MemberQuery extends Query {
     }
 
     $mbr->setGender($array["gender"]);
-    $mbr->setSchoolId($array["school"]);
-    $mbr->setParentName($array["parentname"]);
-    $mbr->setParentOccupation($array["parentoccupation"]);
-    $mbr->setMotherTongue($array["mothertongue"]);
+    $mbr->setSchoolId($array["schoolid"]);
+    $mbr->setParentName($array["parent_name"]);
+    $mbr->setParentOccupation($array["parent_occupation"]);
+    $mbr->setMotherTongue($array["mother_tongue"]);
     $mbr->setStandard($array["standard"]);
-    $mbr->setSchoolTeacher($array["schoolTeacher"]);
+    $mbr->setSchoolTeacher($array["school_teacher"]);
 
     $mbr->setLastName($array["last_name"]);
     $mbr->setFirstName($array["first_name"]);
@@ -226,7 +229,7 @@ class MemberQuery extends Query {
 			$mbr->getParentName(),$mbr->getParentOccupation(),
 			$mbr->getMotherTongue(),$mbr->getHomePhone(),
                         $mbr->getWorkPhone(), $mbr->getEmail(),
-                        $mbr->getClassification(),$mbr->getGender()$mbr->getSchoolTeacher());
+                        $mbr->getClassification(),$mbr->getGender(),$mbr->getSchoolTeacher());
 
     $this->exec($sql);
     $mbrid = $this->_conn->getInsertId();
@@ -235,6 +238,50 @@ class MemberQuery extends Query {
   }
 
   /****************************************************************************
+   * get the Maximum count of the roll number of a perticular standard
+  ****************************************************************************
+  */
+  function getSchoolCode($schoolid)
+  {
+	  $sclq = new SchoolQuery();
+	  $sclq->connect();
+	  $school=$sclq->get($schoolid);
+	  return $school->getSchoolCode();
+  }
+  
+  function getMaxRollNumber($schoolid,$standard)
+  {
+  	$sql=$this->mkSQL("select max(roll_no) as max from member" 
+  			." where schoolid = %N and standard = %Q ",$schoolid,$standard);
+  	return $this->exec($sql);
+  }
+
+  
+
+  #**************************************************************************
+  #*  Function for Padding Zeros
+  #**************************************************************************
+  function leading_zeros($value, $places){
+  	if(is_numeric($value)){
+  		for($x = 1; $x <= $places; $x++){
+  			$ceiling = pow(10, $x);
+  			if($value < $ceiling){
+  				$zeros = $places - $x;
+  				for($y = 1; $y <= $zeros; $y++){
+  					$leading .= "0";
+  				}
+  				$x = $places + 1;
+  			}
+  		}
+  		$output = $leading . $value;
+  	}
+  	else{
+  		$output = $value;
+  	}
+  	return $output;
+  }
+  
+  /****************************************************************************
    * Update a library member in the member table.
    * @param Member $mbr library member to update
    * @access public
@@ -242,8 +289,8 @@ class MemberQuery extends Query {
    */
   function update($mbr) {
     $sql = $this->mkSQL("update member set "
-                        . " last_change_dt = sysdate(), last_change_userid=%N, "
-                        . " barcode_nmbr=%Q,  last_name=%Q,  first_name=%Q, address=%Q,"
+                        . " last_change_dt = sysdate(), last_change_userid=%N, barcode_nmbr=%Q, "
+                        . " last_name=%Q,  first_name=%Q, address=%Q,"
 						. " schoolid=%Q , standard=%Q , roll_no=%Q , parent_name=%Q ,"
 						. " parent_occupation=%Q , mother_tongue=%Q ,"
                         . " home_phone=%Q, work_phone=%Q,"
@@ -256,7 +303,7 @@ class MemberQuery extends Query {
 						$mbr->getParentName(),$mbr->getParentOccupation(),
 						$mbr->getMotherTongue(), $mbr->getHomePhone(),
                         $mbr->getWorkPhone(), $mbr->getEmail(),
-                        $mbr->getClassification(),$mbr->getGender()$mbr->getSchoolTeacher(),$mbr->getMbrid());
+                        $mbr->getClassification(),$mbr->getGender(),$mbr->getSchoolTeacher(),$mbr->getMbrid());
 
     $this->exec($sql);
     $this->setCustomFields($mbr->getMbrid(), $mbr->_custom);

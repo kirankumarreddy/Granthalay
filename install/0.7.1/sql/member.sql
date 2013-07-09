@@ -10,7 +10,7 @@ create table %prfx%member (
   ,address text null
   ,schoolid integer not null
   ,standard varchar(10) null
-  ,roll_no varchar(20) null
+  ,roll_no int(3) zerofill null
   ,parent_name varchar(50) null
   ,parent_occupation varchar(50) null
   ,mother_tongue varchar(20) null

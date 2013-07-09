@@ -60,13 +60,6 @@ class Member {
    */
   function validateData() {
     $valid = true;
-    if ($this->_barcodeNmbr == "") {
-      $valid = false;
-      $this->_barcodeNmbrError = "Card number is required.";
-    } else if (!preg_match(OBIB_BARCODE_RE, $this->_barcodeNmbr)) {
-      $valid = FALSE;
-      $this->_barcodeNmbrError = "Invalid characters in card number.";
-    }
     if ($this->_lastName == "") {
       $valid = false;
       $this->_lastNameError = "Last name is required.";
@@ -221,7 +214,7 @@ class Member {
    function setStandard($value) {
     $this->_standard = trim($value);
   }
-   function setSchoolTeacher(){
+   function setSchoolTeacher($value){
     $this->_schoolTeacher = trim($value);  	
   }
    function setRollNo($value) {

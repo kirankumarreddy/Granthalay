@@ -23,6 +23,8 @@
   require_once("../classes/DmQuery.php");
   require_once("../shared/get_form_vars.php");
   require_once("../classes/Localize.php");
+  require_once('../classes/SchoolQuery.php');
+  require_once('../classes/School.php');
   $loc = new Localize(OBIB_LOCALE,$tab);
 
   #****************************************************************************
@@ -63,6 +65,12 @@
   $mbrQ->connect();
   $mbr = $mbrQ->get($mbrid);
   $mbrQ->close();
+  
+  $sclQ = new SchoolQuery();
+  $sclQ->connect();
+  $sclName = $sclQ->getSchoolName($mbr->getSchoolId());
+  $sclQ->close();
+  
 
   #****************************************************************************
   #*  Check for outstanding balance due
@@ -163,7 +171,7 @@
       <?php echo $loc->getText("mbrViewSchool"); ?>
     </td>
     <td valign="top" class="primary">
-      <?php echo H($mbr->getSchoolId());?>
+      <?php echo H($sclName);?>
     </td>
   </tr>
   <tr>
