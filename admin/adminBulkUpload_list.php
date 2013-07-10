@@ -36,7 +36,9 @@
      while(count($lines)) {
       //$columns = explode(",",trim(array_shift($lines)));
       $columns = str_getcsv(array_shift($lines), ",", "\"");
-  
+  /*
+   * Column 0 is for Serial Number
+   * */
 	  if ($columns[0]=='S No') {
 			continue;
 	  }
@@ -46,35 +48,61 @@
 			$b[$rowcount]="Record " . $rowcount . " Barcode/Serial No not entered.";
 			continue;
 	  }
+	  /*
+	   * Column 1 is for Title 
+	   */
 	  if (strlen(trim($columns[1]))==0) {
 			$b[$rowcount]="Record " . $rowcount . " Title not entered.";
 			continue;
 	  } else {
 	  	 $columns[1] = str_replace("'","\'",$columns[1]);
 	  }
-	  
+	  /*
+	   * Column 2 is for Author
+	  */
+	  	 
 	  $columns[2] = str_replace("'","\'",$columns[2]);
-	  
+	  /*
+	   * Column 3 is for Circulation Status
+	  */
+	  	 
 	  if (strlen(trim($columns[3]))==0) {
 	  		$columns[3] = "in";
  	  }
 	  if (strcmp($columns[3],'Missing')==0) {
 	  		$columns[3] = "lst";
  	  }
-	  if (strcmp($columns[3],'Yes')==0) {
+	  if (strcmp($columns[3],'Active')==0) {
 	  		$columns[3] = "in";
  	  }
-	  if (strcmp($columns[3],'No')==0) {
+	  if (strcmp($columns[3],'Inactive')==0) {
 	  		$columns[3] = "ina";
  	  }
-	  if (strlen(trim($columns[4]))==0) {
-			$b[$rowcount]="Record " . $rowcount . " Reading Level not entered.";
-			continue;
+ 	  if (strcmp($columns[3],'Damaged')==0) {
+ 	  	$columns[3] = "mnd";
+ 	  }
+ 	  
+ 	  /*
+ 	   * Column 4 is for Reading Level
+ 	  */
+ 	  
+	  if ((strlen(trim($columns[4]))==0)||(strcmp($columns[4],'X')==0)) {
+	  	$columns[4]=0;
 	  }
-	  if (strlen(trim($columns[5]))==0) {
-			$b[$rowcount]="Record " . $rowcount . " Basket not entered.";
-			continue;
+	  
+	  /*
+	   * Column 5 is for Basket Number
+	  */
+	  	 
+	  if ((strlen(trim($columns[5]))==0)|| (strcmp($columns[5],'XY')==0)) 
+	  {
+	  	 $columns[5]="Unassigned";
 	  }
+	  
+	  /*
+	   * Column 6 is for Comments
+	  */
+	  	 
 	  if (strlen(trim($columns[6]))==0) {
 			$columns[6] = ' ';
 	  }

@@ -38,12 +38,35 @@
   $_POST["firstName"] = $mbr->getFirstName();
   $mbr->setAddress($_POST["address"]);
   $_POST["address"] = $mbr->getAddress();
+  
+  $mbr->setGender($_POST["gender"]);
+  $_POST["gender"] = $mbr->getGender();
+
+  $mbr->setSchoolId($_POST["school"]);
+  $_POST["school"] = $mbr->getSchoolId();
+
+  $mbr->setSchoolTeacher($_POST["schoolTeacher"]);
+  $_POST["schoolTeacher"] = $mbr->getSchoolTeacher();
+
+  $mbr->setParentName($_POST["parentname"]);
+  $_POST["parentname"] = $mbr->getParentName();
+ 
+  $mbr->setParentOccupation($_POST["parentoccupation"]);
+  $_POST["parentoccupation"] = $mbr->getParentOccupation();
+
+  $mbr->setMotherTongue($_POST["mothertongue"]);
+  $_POST["mothertongue"] = $mbr->getMotherTongue();
+  
+  $mbr->setStandard($_POST["standard"]);
+  $_POST["standard"] = $mbr->getStandard();
+
   $mbr->setHomePhone($_POST["homePhone"]);
   $_POST["homePhone"] = $mbr->getHomePhone();
   $mbr->setWorkPhone($_POST["workPhone"]);
   $_POST["workPhone"] = $mbr->getWorkPhone();
   $mbr->setEmail($_POST["email"]);
   $_POST["email"] = $mbr->getEmail();
+
   $mbr->setClassification($_POST["classification"]);
   
   $dmQ = new DmQuery();
@@ -58,7 +81,6 @@
   
   $validData = $mbr->validateData();
   if (!$validData) {
-    $pageErrors["barcodeNmbr"] = $mbr->getBarcodeNmbrError();
     $pageErrors["lastName"] = $mbr->getLastNameError();
     $pageErrors["firstName"] = $mbr->getFirstNameError();
     $_SESSION["postVars"] = $_POST;
@@ -81,6 +103,19 @@
     exit();
   }
 
+  
+  #**************************************************************************
+  #*  Check for  maximum Roll number
+  #**************************************************************************
+  $mbrQ = new MemberQuery();
+  $mbrQ->connect();
+  $rollNumberList = $mbrQ->getMaxRollNumber($mbr->getSchoolId(), $mbr->getStandard());
+  $rollNumber=($rollNumberList[0]['max'])+1;
+  $mbr->setRollNo($rollNumber);
+  $roll=$mbrQ->leading_zeros($rollNumber, 3);
+  $schoolcode= $mbrQ->getSchoolCode($mbr->getSchoolId());
+  $mbr->setBarcodeNmbr($schoolcode."".$roll);
+  $_POST["barcodeNmbr"] = $mbr->getBarcodeNmbr();
   #**************************************************************************
   #*  Insert new library member
   #**************************************************************************

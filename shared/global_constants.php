@@ -46,6 +46,11 @@ define("OBIB_STATUS_DISPLAY_AREA","dis");
 define("OBIB_STATUS_INACTIVE","ina");
 //#C4 -end
 define("OBIB_STATUS_ON_ORDER","ord");
+
+define("OBIB_GENDER_MALE","Male");
+define("OBIB_GENDER_FEMALE","Female");
+
+
 define("OBIB_STATUS_SHELVING_CART","crt");
 define("OBIB_STATUS_ON_HOLD","hld");
 define("OBIB_MBR_CLASSIFICATION_JUVENILE","j");

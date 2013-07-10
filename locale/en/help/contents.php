@@ -14,6 +14,7 @@
     <ol type="a">
       <li><a href="../shared/help.php?page=circulation">Member Search (Circulation index) page</a></li>
       <li><a href="../shared/help.php?page=memberView">Member Info page</a></li>
+      <li><a href="../shared/help.php?page=schoolView">School Info page</a></li>
       <li><a href="../shared/help.php?page=opacLookup">Barcode Lookup page</a></li>
       <li><a href="../shared/help.php?page=checkin">Check In page</a></li>
     </ol>
