@@ -148,7 +148,7 @@ class MemberQuery extends Query {
     $mbr->setMotherTongue($array["mother_tongue"]);
     $mbr->setStandard($array["standard"]);
     $mbr->setSchoolTeacher($array["school_teacher"]);
-
+	$mbr->setGrade($array["grade"]);
     $mbr->setLastName($array["last_name"]);
     $mbr->setFirstName($array["first_name"]);
     $mbr->setAddress($array["address"]);
@@ -218,14 +218,14 @@ class MemberQuery extends Query {
     $sql = $this->mkSQL("insert into member "
                         . "(mbrid, barcode_nmbr, create_dt, last_change_dt, "
                         . " last_change_userid, last_name, first_name, address, schoolid ,"
-                        . " standard, roll_no, parent_name, parent_occupation, mother_tongue, "
+                        . " standard, grade, roll_no, parent_name, parent_occupation, mother_tongue, "
 						. " home_phone, work_phone, email, classification, gender, school_teacher) "
                         . "values (null, %Q, sysdate(), sysdate(), %N, "
-                        . " %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q) ",
+                        . " %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q) ",
                         $mbr->getBarcodeNmbr(), $mbr->getLastChangeUserid(),
                         $mbr->getLastName(), $mbr->getFirstName(),
                         $mbr->getAddress(), $mbr->getSchoolId() ,
-			$mbr->getStandard(),$mbr->getRollNo(),
+			$mbr->getStandard(),$mbr->getGrade(),$mbr->getRollNo(),
 			$mbr->getParentName(),$mbr->getParentOccupation(),
 			$mbr->getMotherTongue(),$mbr->getHomePhone(),
                         $mbr->getWorkPhone(), $mbr->getEmail(),
@@ -256,6 +256,12 @@ class MemberQuery extends Query {
   	return $this->exec($sql);
   }
 
+  function getStandards($schoolid)
+  {
+  	$sql=$this->mkSQL("SELECT concat(standard,grade) as standard_grade,max(roll_no) as max" 
+  			." FROM member where schoolid= %N  group by standard_grade order by max desc",$schoolid);
+  	return $this->exec($sql);
+  }
   
 
   #**************************************************************************
@@ -291,7 +297,7 @@ class MemberQuery extends Query {
     $sql = $this->mkSQL("update member set "
                         . " last_change_dt = sysdate(), last_change_userid=%N, barcode_nmbr=%Q, "
                         . " last_name=%Q,  first_name=%Q, address=%Q,"
-						. " schoolid=%Q , standard=%Q , roll_no=%Q , parent_name=%Q ,"
+						. " schoolid=%Q, standard=%Q, grade=%Q, roll_no=%Q , parent_name=%Q ,"
 						. " parent_occupation=%Q , mother_tongue=%Q ,"
                         . " home_phone=%Q, work_phone=%Q,"
                         . " email=%Q, classification=%Q, gender=%Q, school_teacher=%Q "
@@ -299,7 +305,7 @@ class MemberQuery extends Query {
                         $mbr->getLastChangeUserid(), $mbr->getBarcodeNmbr(),
                         $mbr->getLastName(), $mbr->getFirstName(),
                         $mbr->getAddress(), $mbr->getSchoolId() ,
-						$mbr->getStandard(),$mbr->getRollNo(),
+						$mbr->getStandard(),$mbr->getGrade(),$mbr->getRollNo(),
 						$mbr->getParentName(),$mbr->getParentOccupation(),
 						$mbr->getMotherTongue(), $mbr->getHomePhone(),
                         $mbr->getWorkPhone(), $mbr->getEmail(),

@@ -78,6 +78,7 @@ $trans["mbrFldsGender"]        = "\$text='Gender:';";
 $trans["mbrFldsSchool"]        = "\$text='School:';";
 $trans["mbrFldsSchoolTeacher"]        = "\$text='School Teacher:';";
 $trans["mbrFldsStandard"]      = "\$text='Standard:';";
+$trans["mbrFldsStandardGrade"]      = "\$text='Grade';";
 
 $trans["mbrFldsParentName"]        = "\$text='Parent Name:';";
 $trans["mbrFldsParentOccupation"]  = "\$text='Parent Occupation:';";
@@ -170,6 +171,7 @@ $trans["mbrViewName"]             = "\$text='Name:';";
 $trans["mbrViewAddr"]             = "\$text='Address:';";
 $trans["mbrViewCardNmbr"]         = "\$text='Card Number:';";
 $trans["mbrViewClassify"]         = "\$text='Classification:';";
+$trans["mbrViewStandard"]         = "\$text='Standard:';";
 $trans["mbrViewPhone"]            = "\$text='Phone:';";
 $trans["mbrViewPhoneHome"]        = "\$text='H:';";
 $trans["mbrViewPhoneWork"]        = "\$text='W:';";

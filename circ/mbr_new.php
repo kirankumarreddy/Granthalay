@@ -41,7 +41,10 @@
   
   $mbr->setGender($_POST["gender"]);
   $_POST["gender"] = $mbr->getGender();
-
+  
+  $mbr->setGrade($_POST["grade"]);
+  $_POST["grade"] = $mbr->getGrade();
+  
   $mbr->setSchoolId($_POST["school"]);
   $_POST["school"] = $mbr->getSchoolId();
 
@@ -107,15 +110,37 @@
   #**************************************************************************
   #*  Check for  maximum Roll number
   #**************************************************************************
-  $mbrQ = new MemberQuery();
-  $mbrQ->connect();
-  $rollNumberList = $mbrQ->getMaxRollNumber($mbr->getSchoolId(), $mbr->getStandard());
-  $rollNumber=($rollNumberList[0]['max'])+1;
-  $mbr->setRollNo($rollNumber);
-  $roll=$mbrQ->leading_zeros($rollNumber, 3);
-  $schoolcode= $mbrQ->getSchoolCode($mbr->getSchoolId());
-  $mbr->setBarcodeNmbr($schoolcode."".$roll);
-  $_POST["barcodeNmbr"] = $mbr->getBarcodeNmbr();
+		  $mbrQ = new MemberQuery();
+		  $mbrQ->connect();
+		  $standardsList = $mbrQ->getStandards($mbr->getSchoolId());
+		  $standards=array();
+		  foreach ($standardsList as $standard)
+		  {
+		  	$standards[$standard['standard_grade']]=$standard['max'];
+		  }
+		  $std=$mbr->getStandard();
+		  $stdGrade=$mbr->getGrade();
+		  $standardGrade=$std."".$stdGrade;
+		  if(($standards[$standardGrade]==null))
+		  {
+		  	$prev_roll=$standardsList[0]['max'];
+		  	if($prev_roll>0)
+		  	{
+		  		$roll=$prev_roll+100;
+		  		$roll-=($prev_roll%100);
+		  	}
+		  	$roll=0;
+		  }
+		  else
+		  	$roll=$standards[$standardGrade];
+		  
+		  $rollNumber=($roll+1);
+		  $roll=$mbrQ->leading_zeros($rollNumber, 3);
+		  $mbr->setRollNo($roll);
+		  $schoolcode= $mbrQ->getSchoolCode($mbr->getSchoolId());
+		  $mbr->setBarcodeNmbr($schoolcode."".$roll);
+		  $_POST["barcodeNmbr"] = $mbr->getBarcodeNmbr();
+  
   #**************************************************************************
   #*  Insert new library member
   #**************************************************************************

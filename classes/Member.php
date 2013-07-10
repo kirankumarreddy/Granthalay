@@ -38,6 +38,7 @@ class Member {
   // #C6 - begin
   var $_schoolId ="";
   var $_standard ="";
+  var $_grade="";
   var $_rollNo ="";
   var $_parentName ="";
   var $_parentOccupation ="";
@@ -130,6 +131,10 @@ class Member {
   function getStandard() {
     return $this->_standard;
   }
+
+  function getGrade() {
+  	return $this->_grade;
+  }
   
   function getRollNo() {
     return $this->_rollNo;
@@ -214,6 +219,11 @@ class Member {
    function setStandard($value) {
     $this->_standard = trim($value);
   }
+  
+  function setGrade($value) {
+  	$this->_grade = trim($value);
+  }
+  
    function setSchoolTeacher($value){
     $this->_schoolTeacher = trim($value);  	
   }
