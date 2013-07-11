@@ -144,11 +144,11 @@
 		  		$roll=$prev_roll+100;
 		  		$roll-=($prev_roll%100);
 		  	}
-		  	$roll=0;
+		  	else
+		  		$roll=0;
 		  }
 		  else
 		  	$roll=$standards[$standardGrade];
-		  
 		  $rollNumber=($roll+1);
 		  $roll=$mbrQ->leading_zeros($rollNumber, 3);
 		  $mbr->setRollNo($roll);

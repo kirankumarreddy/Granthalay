@@ -308,10 +308,10 @@ class BiblioQuery extends Query {
     // updating biblio table
     $sql = $this->mkSQL("update biblio set last_change_dt = sysdate(), "
                         . " last_change_userid=%N, material_cd=%N, "
-                        . " collection_cd=%N, "
+                        . " collection_cd=%N, reading_level=%Q, "
                         . " call_nmbr1=%Q, call_nmbr2=%Q, call_nmbr3=%Q, ",
                         $biblio->getLastChangeUserid(),
-                        $biblio->getMaterialCd(), $biblio->getCollectionCd(),
+                        $biblio->getMaterialCd(), $biblio->getCollectionCd(), $biblio->getReadingLevel(),
                         $biblio->getCallNmbr1(), $biblio->getCallNmbr2(),
                         $biblio->getCallNmbr3());
     foreach ($this->_fieldsInBiblio as $key => $name) {

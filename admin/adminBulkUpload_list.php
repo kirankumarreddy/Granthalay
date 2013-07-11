@@ -45,14 +45,14 @@
 	  $rowcount++;
 	  if (strlen(trim($columns[0]))==0) {
 		  	//add title to an array
-			$b[$rowcount]="Record " . $rowcount . " Barcode/Serial No not entered.";
+			$b[$rowcount]="Line Number " . $rowcount . " Barcode/Serial No not entered.";
 			continue;
 	  }
 	  /*
 	   * Column 1 is for Title 
 	   */
 	  if (strlen(trim($columns[1]))==0) {
-			$b[$rowcount]="Record " . $rowcount . " Title not entered.";
+			$b[$rowcount]="Barcode " . $columns[0] . " Title not entered.";
 			continue;
 	  } else {
 	  	 $columns[1] = str_replace("'","\'",$columns[1]);
@@ -87,7 +87,7 @@
  	  */
  	  
 	  if ((strlen(trim($columns[4]))==0)||(strcmp($columns[4],'X')==0)) {
-	  	$columns[4]=0;
+	  	$columns[4]=9;
 	  }
 	  
 	  /*
@@ -116,9 +116,17 @@
 			$b[$rowcount]="Record " . $rowcount . " Unknown error.";
 			continue;
 		  }
-		  $import->insertBiblioCopy($columns,$lastinsertid);
+		  $result=$import->insertBiblioCopy($columns,$lastinsertid);
+		  if($result!=null)
+		  {
+		  	$b[$rowcount]=$result;
+		  }
 	  } else{
-	  	  $import->insertBiblioCopy($columns,$bibid);
+	  	  $result=$import->insertBiblioCopy($columns,$bibid);
+	  	  if($result!=null)
+	  	  {
+	  	  	$b[$rowcount]=$result;
+	  	  }
 	  }		  
     }
 	return $b;

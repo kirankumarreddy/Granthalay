@@ -6,6 +6,8 @@
 require_once("../shared/global_constants.php");
 require_once("../classes/Query.php");
 require_once("../classes/Localize.php");
+require_once("../classes/BiblioCopy.php");
+require_once("../classes/BiblioCopyQuery.php");
 
 /******************************************************************************
  * Import data access component for library bibliographies
@@ -64,12 +66,21 @@ function alreadyInDB($title) {
  * @return nothing
  */
 function insertBiblioCopy($data, $lastInsertID) {
+	$copy=new BiblioCopy();
+	$copy->setBibid($lastInsertID);
+	$copy->setCreateDt(date("Y-m-d H:i:s"));
+	$copy->setBarcodeNmbr($data[0]);
+	$copy->setStatusCd($data[3]);
+	$copy->setStatusBeginDt(date("Y-m-d H:i:s"));
+	$copy->setBasketNumber($data[5]);
+	$copy->setCopyDesc($data[6]);
 	
-	$sql  = "INSERT INTO biblio_copy (create_dt, bibid, barcode_nmbr, status_cd, status_begin_dt, basket_nmbr,copy_desc) VALUES ( ";
-	$sql .= "'" . date("Y-m-d H:i:s") . "','" . $lastInsertID .  "','" . $data[0] . "','" . $data[3] . "','" . date("Y-m-d H:i:s") . "','";
-	$sql .= $data[5]. "','" .$data[6]. "' ) " ;
-  	$r = $this->_act($sql);
- 	return $r;
+	$bibcopyQ=new BiblioCopyQuery();
+ 	if(($bibcopyQ->insert($copy))==false)
+ 	{
+ 		return $bibcopyQ->getError();
+ 	}
+ 	return null;
 }
 
 }

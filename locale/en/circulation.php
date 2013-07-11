@@ -120,6 +120,7 @@ $trans["sclFldsContactPerson"]    = "\$text='Contact Person:';";
 $trans["sclFldsContactNumber"]    = "\$text='Contact Number:';";
 $trans["sclFldsEmail"]            = "\$text='Email :';";
 $trans["sclFldsSubmit"]           = "\$text='Submit';";
+$trans["sclFldsPromote"]           = "\$text='Promote';";
 $trans["sclFldsCancel"]           = "\$text='Cancel';";
 $trans["sclsearchResult"]         = "\$text='Result Pages: ';";
 $trans["sclsearchprev"]           = "\$text='prev';";
@@ -128,6 +129,9 @@ $trans["sclsearchNoResults"]      = "\$text='No results found.';";
 $trans["sclsearchFoundResults"]   = "\$text='results found.';";
 $trans["sclsearchSearchResults"]  = "\$text='Search Results:';";
 $trans["sclInformation"]          = "\$text='School Information:';";
+$trans["sclStandard"]          	  = "\$text='Standard:';";
+$trans["sclGrade"]          	  = "\$text='Grade:';";
+
 #****************************************************************************
 #*  Translation text for page scl_new.php
 #****************************************************************************

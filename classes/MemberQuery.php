@@ -249,20 +249,54 @@ class MemberQuery extends Query {
 	  return $school->getSchoolCode();
   }
   
-  function getMaxRollNumber($schoolid,$standard)
-  {
-  	$sql=$this->mkSQL("select max(roll_no) as max from member" 
-  			." where schoolid = %N and standard = %Q ",$schoolid,$standard);
-  	return $this->exec($sql);
-  }
-
   function getStandards($schoolid)
   {
   	$sql=$this->mkSQL("SELECT concat(standard,grade) as standard_grade,max(roll_no) as max" 
   			." FROM member where schoolid= %N  group by standard_grade order by max desc",$schoolid);
   	return $this->exec($sql);
   }
+
+  function updateStandards($schoolid,$standard,$grade)
+  {
+  	$sql=$this->mkSQL("update member set standard=standard+1" 
+  			." where standard=%N and grade=%N and schoolid=%N",$standard,$grade,$schoolid);
+  	return $this->exec($sql);
+  }
   
+  
+  
+//   function assignRollNumber($mbr)
+//   {
+//   	$standardsList = $this->getStandards($mbr->getSchoolId());
+//   	$standards=array();
+//   	foreach ($standardsList as $standard)
+//   	{
+//   		$standards[$standard['standard_grade']]=$standard['max'];
+//   	}
+//   	$std=$mbr->getStandard();
+//   	$stdGrade=$mbr->getGrade();
+//   	$standardGrade=$std."".$stdGrade;
+//   	if(($standards[$standardGrade]==null))
+//   	{
+//   		$prev_roll=$standardsList[0]['max'];
+//   		if($prev_roll>0)
+//   		{
+//   			$roll=$prev_roll+100;
+//   			$roll-=($prev_roll%100);
+//   		}
+//   		else
+//   			$roll=0;
+//   	}
+//   	else
+//   		$roll=$standards[$standardGrade];
+  	
+//   	$rollNumber=($roll+1);
+//   	$roll=$mbrQ->leading_zeros($rollNumber, 3);
+//   	$mbr->setRollNo($roll);
+//   	$schoolcode= $mbrQ->getSchoolCode($mbr->getSchoolId());
+//   	$mbr->setBarcodeNmbr($schoolcode."".$roll);
+//   	return $mbr->getBarcodeNmbr();
+//   }
 
   #**************************************************************************
   #*  Function for Padding Zeros

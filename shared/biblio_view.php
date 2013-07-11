@@ -144,16 +144,18 @@
       <?php echo H($collectionDm[$biblio->getCollectionCd()]);?>
     </td>
   </tr>
+  <!--  
   <tr>
     <td class="primary" valign="top">
-      <?php echo $loc->getText("biblioViewCallNmbr"); ?>:
+      <?php // echo $loc->getText("biblioViewCallNmbr"); ?>:
     </td>
     <td valign="top" class="primary">
-      <?php echo H($biblio->getCallNmbr1()); ?>
-      <?php echo H($biblio->getCallNmbr2()); ?>
-      <?php echo H($biblio->getCallNmbr3()); ?>
+      <?php // echo H($biblio->getCallNmbr1()); ?>
+      <?php // echo H($biblio->getCallNmbr2()); ?>
+      <?php // echo H($biblio->getCallNmbr3()); ?>
     </td>
   </tr>
+  -->
   <tr>
     <td class="primary" valign="top">
       <?php echo $loc->getText("biblioViewReadingLevel"); ?>:

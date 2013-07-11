@@ -74,19 +74,29 @@
 <?php if ($nav == "schoolView") { ?>
  &nbsp; &raquo; <?php echo $navloc->getText("schoolInfo"); ?><br>
  &nbsp; &nbsp; <a href="../circ/scl_edit_form.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("editInfo"); ?></a><br>
+ &nbsp; &nbsp; <a href="../circ/promote_confirm.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("promote"); ?></a><br>
  &nbsp; &nbsp; <a href="../circ/scl_del_confirm.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolDelete"); ?></a><br>
 <?php } ?>
 
 <?php if ($nav == "schoolEdit") { ?>
  &nbsp; <a href="../circ/scl_view.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolInfo"); ?></a><br>
  &nbsp; &nbsp; &raquo; <?php echo $navloc->getText("editInfo"); ?><br>
+ &nbsp; &nbsp; <a href="../circ/promote_confirm.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("promote"); ?></a><br>
  &nbsp; &nbsp; <a href="../circ/scl_del_confirm.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolDelete"); ?></a><br>
 <?php } ?>
 
 <?php if ($nav == "schoolDelete") { ?>
  &nbsp; <a href="../circ/scl_view.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolInfo"); ?></a><br>
  &nbsp; &nbsp; <a href="../circ/scl_edit_form.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("editInfo"); ?></a><br>
+ &nbsp; &nbsp; <a href="../circ/promote_confirm.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("promote"); ?></a><br>
  &nbsp; &nbsp; &raquo; <?php echo $navloc->getText("schoolDelete"); ?><br>
+<?php } ?>
+
+<?php if ($nav == "promote") { ?>
+ &nbsp; <a href="../circ/scl_view.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolInfo"); ?></a><br>
+ &nbsp; &nbsp; <a href="../circ/scl_edit_form.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("editInfo"); ?></a><br>
+ &nbsp; &nbsp; &raquo; <?php echo $navloc->getText("promote"); ?><br>
+ &nbsp; &nbsp; <a href="../circ/scl_del_confirm.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolDelete"); ?></a><br>
 <?php } ?>
 
 
