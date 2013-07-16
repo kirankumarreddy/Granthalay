@@ -36,7 +36,7 @@
      while(count($lines)) {
       //$columns = explode(",",trim(array_shift($lines)));
       $columns = str_getcsv(array_shift($lines), ",", "\"");
-	  if ($columns[0]=='FirstName') {
+	  if ($columns[0]=='First Name') {
 			continue;
 	  }
 	  $rowcount++;
@@ -48,31 +48,54 @@
 	  	 $columns[0] = str_replace("'","\'",$columns[0]);
 	  }
 	  if (strlen(trim($columns[1]))==0) {
-			$b[$rowcount]="Record " . $rowcount . " last name not entered.";
-			continue;
+			//$b[$rowcount]="Record " . $rowcount . " last name not entered.";
 	  } else {
 	  	 $columns[1] = str_replace("'","\'",$columns[1]);
 	  }
+
 	  if (strlen(trim($columns[2]))==0) {
-			$b[$rowcount]="Record " . $rowcount . " school name  not entered.";
-			continue;
+	  	$b[$rowcount]="Record " . $rowcount . " Gender is not entered.";
+	  	continue;
 	  }
+	   
 	  if (strlen(trim($columns[3]))==0) {
+			$b[$rowcount]="Record " . $rowcount . " school Id  not entered.";
+			continue;
+	  }else {
+	  	 $columns[3] = str_replace("'","\'",$columns[3]);
+	  }
+	  if (strlen(trim($columns[4]))==0) {
 			$b[$rowcount]="Record " . $rowcount . " standard not entered.";
 			continue;
 	  }
-	   if (strlen(trim($columns[4]))==0) {
-			$b[$rowcount]="Record " . $rowcount . " roll no not entered.";
-			continue;
+	  if (strlen(trim($columns[5]))==0) {
+	  	//			$b[$rowcount]="Record " . $rowcount . " grade not entered.";
 	  }
-	   if (strlen(trim($columns[5]))==0) {
-			$b[$rowcount]="Record " . $rowcount . " parent name  not entered.";
-			continue;
+	   
+	  if (strlen(trim($columns[6]))==0) {
+//			$b[$rowcount]="Record " . $rowcount . " roll no not entered.";
+	  }
+	   if (strlen(trim($columns[7]))==0) {
+		//	$b[$rowcount]="Record " . $rowcount . " parent name  not entered.";
 	  } else {
-	  	 $columns[5] = str_replace("'","\'",$columns[5]);
+	  	 $columns[6] = str_replace("'","\'",$columns[7]);
 	  }
+	  
+       if (strlen(trim($columns[8]))==0) {
+		//	$b[$rowcount]="Record " . $rowcount . " Occupation of parent not entered.";
+	  } else {
+	  	 $columns[7] = str_replace("'","\'",$columns[8]);
+	  }
+	  
+	  if (strlen(trim($columns[9]))==0) {
+	  //	$b[$rowcount]="Record " . $rowcount . " Mother Tongue  not entered.";
+	  } else {
+	  	$columns[8] = str_replace("'","\'",$columns[9]);
+	  }
+	   
+	  	   
 	  $import = new MemberImportQuery();
-	  $mbrid = $import->alreadyInDB($columns[0], $columns[1], $columns[5]);
+	  $mbrid = $import->alreadyInDB($columns[0], $columns[1], $columns[7], $columns[9]);
 	  if ($mbrid==0) {
  		  $lastinsertid = $import->insertMember($columns);
 		  if ($lastinsertid==0) {

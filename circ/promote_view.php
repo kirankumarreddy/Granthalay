@@ -25,8 +25,7 @@
     header("Location: ../circ/index.php");
     exit();
   }
-  
-   
+
   #****************************************************************************
   #*  Retrieving get var
   #****************************************************************************
@@ -45,18 +44,21 @@
   $scl= $sclQ->get($sclid);
   $sclQ->close();
   
+  
   #**************************************************************************
   #*  Show school information
   #**************************************************************************
   require_once("../shared/header.php");
 ?>
 
-<table class="primary" align="center" >
+<?php echo $msg ?>
+
+<table class="primary">
   <tr><td class="noborder" valign="top">
   <br>
-<table class="primary" border="0" >
+<table class="primary">
   <tr>
-    <th align="center" colspan="2" nowrap="yes">
+    <th align="left" colspan="2" nowrap="yes">
       <?php echo $loc->getText("sclInformation"); ?>
     </th>
   </tr>
@@ -68,7 +70,7 @@
       <?php echo H($scl->getSchoolName());?>
     </td>
   </tr>
-    <tr>
+  <tr>
     <td class="primary" valign="top">
       <?php echo $loc->getText("sclFldsSchoolCode"); ?>
     </td>
@@ -78,37 +80,37 @@
       ?>
     </td>
   </tr>
-  
-    <?php 
-		  $standardLevel=array(0=>0,1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9);
-		  $standardGrade=array(''=>'none','A'=>'A','B'=>'B','C'=>'C','D'=>'D','E'=>'E',
-							'F'=>'F','G'=>'G','H'=>'H','I'=>'I','J'=>'J','K'=>'K','L'=>'L','M'=>'M',
-							'N'=>'N','O'=>'O','P'=>'P','Q'=>'Q','R'=>'R','S'=>'S','T'=>'T',
-							'U'=>'U','V'=>'V','W'=>'W','X'=>'X','Y'=>'Y','Z'=>'Z');
-		  $fields = array(
-			"sclStandard" => inputField('select', 'standardLevel', null, NULL, $standardLevel),
-			"sclGrade" => inputField('select', 'standardGrade', null, NULL, $standardGrade)
-		);
-  ?>  
-	  <?php
-		  foreach ($fields as $title => $html) {
-	?>
-	  <tr>
-	    <td nowrap="true" class="primary" valign="top">
-	     <?php echo $loc->getText($title); ?>
-	    </td>
-	    <td valign="top" class="primary">
-	      <?php echo $html; ?>
-	    </td>
-	  </tr>
-	<?php
-	  }
-	?>		
-	
-	  <tr>
-    <td align="center" colspan="2" class="primary">
-      <input type="submit" value="<?php echo $loc->getText("sclFldsPromote"); ?>" onClick="../circ/promote_students.php" class="button">
-      <input type="button" onClick="self.location='<?php echo H(addslashes($cancelLocation));?>'" value="<?php echo $loc->getText("sclFldsCancel"); ?>" class="button">
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("sclFldsAddress"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($scl->getSchoolAddress());?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("sclFldsContactPerson"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($scl->getcontactPerson());?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo H($loc->getText("sclFldsContactNumber")); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php
+          echo H($scl->getContactNumber()); ?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("sclFldsEmail"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($scl->getEmail());?>
     </td>
   </tr>
 </table>

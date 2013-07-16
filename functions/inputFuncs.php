@@ -32,6 +32,10 @@ function inputField($type, $name, $value="", $attrs=NULL, $data=NULL) {
   if (!isset($attrs['onChange'])) {
     $attrs['onChange'] = 'modified=true';
   }
+  
+  if (isset($attrs['readonly'])) {
+  	$attrs['readonly'] = 'readonly';
+  }
   switch ($type) {
   // FIXME radio
   case 'select':

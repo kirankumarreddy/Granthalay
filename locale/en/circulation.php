@@ -77,8 +77,8 @@ $trans["mbrFldsFirstName"]        = "\$text='First Name:';";
 $trans["mbrFldsGender"]        = "\$text='Gender:';";
 $trans["mbrFldsSchool"]        = "\$text='School:';";
 $trans["mbrFldsSchoolTeacher"]        = "\$text='School Teacher:';";
-$trans["mbrFldsStandard"]      = "\$text='Standard:';";
-$trans["mbrFldsStandardGrade"]      = "\$text='Grade';";
+$trans["mbrFldsStandard"]      = "\$text='Standard/Grade:';";
+$trans["mbrFldsStandardGrade"]      = "\$text='Section:';";
 
 $trans["mbrFldsParentName"]        = "\$text='Parent Name:';";
 $trans["mbrFldsParentOccupation"]  = "\$text='Parent Occupation:';";
@@ -113,6 +113,7 @@ $trans["sclNewForm"]              = "\$text='Add New';";
 $trans["sclEditForm"]             = "\$text='Edit';";
 $trans["sclFldsHeader"]           = "\$text='School:';";
 
+$trans["sclFldsSchoolId"]       = "\$text='School Id:';";
 $trans["sclFldsSchoolName"]       = "\$text='School Name:';";
 $trans["sclFldsSchoolCode"]  	  = "\$text='School Code:';";
 $trans["sclFldsAddress"]          = "\$text='School Address:';";
@@ -132,10 +133,12 @@ $trans["sclInformation"]          = "\$text='School Information:';";
 $trans["sclStandard"]          	  = "\$text='Standard:';";
 $trans["sclGrade"]          	  = "\$text='Grade:';";
 
+
 #****************************************************************************
 #*  Translation text for page scl_new.php
 #****************************************************************************
 $trans["sclNewSuccess"]           = "\$text='School has been successfully added.';";
+$trans["sclPromoteSuccess"]       = "\$text='Students of Grade %grade% have been successfully Promoted.';";
 
 #****************************************************************************
 #*  Translation text for page scl_edit.php

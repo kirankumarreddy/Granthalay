@@ -95,7 +95,7 @@
   
   $validData = $mbr->validateData();
   if (!$validData) {
-    $pageErrors["lastName"] = $mbr->getLastNameError();
+//    $pageErrors["lastName"] = $mbr->getLastNameError();
     $pageErrors["firstName"] = $mbr->getFirstNameError();
     $_SESSION["postVars"] = $_POST;
     $_SESSION["pageErrors"] = $pageErrors;
@@ -127,34 +127,8 @@
 	 {
 		  $mbrQ = new MemberQuery();
 		  $mbrQ->connect();
-		  $standardsList = $mbrQ->getStandards($mbr->getSchoolId());
-		  $standards=array();
-		  foreach ($standardsList as $standard)
-		  {
-		  	$standards[$standard['standard_grade']]=$standard['max'];
-		  }
-		  $std=$mbr->getStandard();
-		  $stdGrade=$mbr->getGrade();
-		  $standardGrade=$std."".$stdGrade;
-		  if(($standards[$standardGrade]==null))
-		  {
-		  	$prev_roll=$standardsList[0]['max'];
-		  	if($prev_roll>0)
-		  	{
-		  		$roll=$prev_roll+100;
-		  		$roll-=($prev_roll%100);
-		  	}
-		  	else
-		  		$roll=0;
-		  }
-		  else
-		  	$roll=$standards[$standardGrade];
-		  $rollNumber=($roll+1);
-		  $roll=$mbrQ->leading_zeros($rollNumber, 3);
-		  $mbr->setRollNo($roll);
-		  $schoolcode= $mbrQ->getSchoolCode($mbr->getSchoolId());
-		  $mbr->setBarcodeNmbr($schoolcode."".$roll);
-		  $_POST["barcodeNmbr"] = $mbr->getBarcodeNmbr();
+		  $barcode=$mbrQ->assignRollNumber($mbr);
+		  $mbr->setBarcodeNmbr($barcode);
 	 }
   #**************************************************************************
   #*  Check for duplicate barcode number

@@ -141,7 +141,7 @@
       <?php echo $loc->getText("mbrViewStandard"); ?>
     </td>
     <td valign="top" class="primary">
-      <?php echo H($mbr->getStandard()."-".$mbr->getGrade());?>
+      <?php echo H($mbr->getStandard()."".$mbr->getGrade());?>
     </td>
   </tr>
   

@@ -255,6 +255,15 @@ class MemberQuery extends Query {
   			." FROM member where schoolid= %N  group by standard_grade order by max desc",$schoolid);
   	return $this->exec($sql);
   }
+  
+  function getRollNumber($schoolid,$standard,$grade)
+  {
+  	$sql=$this->mkSQL("select l.roll_no+1 as number from member as l left outer join" 
+  			." member as r on l.roll_no+1=r.roll_no where r.roll_no is null" 
+  			." and l.schoolid=%Q and l.standard=%Q and l.grade=%Q",$schoolid,$standard,$grade);
+  	$result= $this->exec($sql);
+  	return $result[0]['number'];
+  }
 
   function updateStandards($schoolid,$standard,$grade)
   {
@@ -263,40 +272,65 @@ class MemberQuery extends Query {
   	return $this->exec($sql);
   }
   
+  /*Function to check whether the sequence starts with 1 or not and if not, assigns 1 or the discarded number, else gives the max roll_number*/
+  function rollCheck($schoolid,$standard,$grade)
+  {
+  	$sql=$this->mkSQL("select roll_no as roll from member" 
+  			." where grade=%Q and schoolid=%Q and standard=%Q order by roll_no",$grade,$schoolid,$standard);
+  	$result= $this->exec($sql);
+  	$base=$result[0]['roll']-($result[0]['roll']%100);
+//  	$roll_num='';
+  	foreach($result as $mem)
+  	{
+  		if($mem['roll']-$base>1)
+  		{
+  			$roll_num=$base+1;
+  			break;
+  		}
+  		else
+  			$base=$mem['roll'];
+  	}
+  	if((!isset($roll_num))||($roll_num==''))
+  		$roll_num=$base+1;
+  	return $roll_num;
+  }
   
-  
-//   function assignRollNumber($mbr)
-//   {
-//   	$standardsList = $this->getStandards($mbr->getSchoolId());
-//   	$standards=array();
-//   	foreach ($standardsList as $standard)
-//   	{
-//   		$standards[$standard['standard_grade']]=$standard['max'];
-//   	}
-//   	$std=$mbr->getStandard();
-//   	$stdGrade=$mbr->getGrade();
-//   	$standardGrade=$std."".$stdGrade;
-//   	if(($standards[$standardGrade]==null))
-//   	{
-//   		$prev_roll=$standardsList[0]['max'];
-//   		if($prev_roll>0)
-//   		{
-//   			$roll=$prev_roll+100;
-//   			$roll-=($prev_roll%100);
-//   		}
-//   		else
-//   			$roll=0;
-//   	}
-//   	else
-//   		$roll=$standards[$standardGrade];
-  	
-//   	$rollNumber=($roll+1);
-//   	$roll=$mbrQ->leading_zeros($rollNumber, 3);
-//   	$mbr->setRollNo($roll);
-//   	$schoolcode= $mbrQ->getSchoolCode($mbr->getSchoolId());
-//   	$mbr->setBarcodeNmbr($schoolcode."".$roll);
-//   	return $mbr->getBarcodeNmbr();
-//   }
+  /* Returns the generated Barcode number as the combination of school id and roll number*/
+  function assignRollNumber($mbr)
+  {
+		  $standardsList = $this->getStandards($mbr->getSchoolId());
+		  $standards=array();
+		  foreach ($standardsList as $standard)
+		  {
+		  	$standards[$standard['standard_grade']]=$standard['max'];
+		  }
+		  $std=$mbr->getStandard();
+		  $stdGrade=$mbr->getGrade();
+		  $standardGrade=$std."".$stdGrade;
+		  /*If section does not exists*/
+		  if(($standards[$standardGrade]==null))
+		  {
+		  	$prev_roll=$standardsList[0]['max'];
+		  	if($prev_roll>0)
+		  	{
+		  		$roll=$prev_roll+100;
+		  		$roll-=($prev_roll%100);
+		  	}
+		  	else
+		  		$roll=0;
+		  	$rollNumber=($roll+1);
+		  }
+		  /*If section exists*/
+		  else
+		  {
+		  	$rollNumber=$this->rollCheck($mbr->getSchoolId(), $mbr->getStandard(), $mbr->getGrade());
+		  }
+		  $roll=$this->leading_zeros($rollNumber, 3);
+		  $mbr->setRollNo($roll);
+		  $schoolcode= $this->getSchoolCode($mbr->getSchoolId());
+		  $mbr->setBarcodeNmbr($schoolcode."".$roll);
+	  	return $mbr->getBarcodeNmbr();
+  }
 
   #**************************************************************************
   #*  Function for Padding Zeros

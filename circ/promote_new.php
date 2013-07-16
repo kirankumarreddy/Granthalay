@@ -6,12 +6,14 @@
   require_once("../shared/common.php");
   $tab = "circulation";
   $restrictToMbrAuth = TRUE;
-  $nav = "schoolEdit";
+  $nav = "promote";
   $restrictInDemo = true;
   require_once("../shared/logincheck.php");
 
   require_once("../classes/School.php");
   require_once("../classes/SchoolQuery.php");
+  require_once("../classes/Member.php");
+  require_once("../classes/MemberQuery.php");
   require_once("../classes/DmQuery.php");
   require_once("../functions/errorFuncs.php");
   require_once("../classes/Localize.php");
@@ -20,50 +22,38 @@
   #****************************************************************************
   #*  Checking for post vars.  Go back to form if none found.
   #****************************************************************************
-
   if (count($_POST) == 0) {
-    header("Location: ../circ/index.php");
+    header("Location: ../circ/promote_new_form.php");
     exit();
   }
+    $sclid = $_POST["schoolId"];
+//    if (isset($_GET["sclid"])){
+//    $sclid = $_GET["sclid"];
+//  } else {
+//    require("../shared/get_form_vars.php");
+//    $sclid = $postVars["sclid"];
+//  }
+
+  $schoolid = $_POST["schoolId"];
 
   #****************************************************************************
   #*  Validate data
   #****************************************************************************
-  $sclid = $_POST["sclid"];
-  $scl = new School();
-  $scl->setSchoolid($_POST["sclid"]);
-//  $scl->setSchoolCode($_POST["schoolCode"]);
-//  $_POST["schoolCode"] = $scl->getSchoolCode();
-  $scl->setLastChangeUserid($_SESSION["userid"]);
-  $scl->setSchoolName($_POST["schoolName"]);
-  $_POST["schoolName"] = $scl->getSchoolName();
-  $scl->setSchoolAddress($_POST["schoolAddress"]);
-  $_POST["schoolAddress"] = $scl->getSchoolAddress();
-  $scl->setContactNumber($_POST["contactNumber"]);
-  $_POST["contactNumber"] = $scl->getContactNumber();
-  $scl->setcontactPerson($_POST["contactPerson"]);
-  $_POST["contactPerson"] = $scl->getContactPerson();
   
-  $scl->setEmail($_POST["email"]);
-  $_POST["email"] = $scl->getEmail();
-    
-  $sclQ = new SchoolQuery();
-  $sclQ->connect();
+  #**************************************************************************
+  #*  Insert new library school
+  #**************************************************************************
 
-  $validData = $scl->validateData();
-  if (!$validData) {
-  	$pageErrors["schoolName"] = $scl->getSchoolNameError();
-  	$_SESSION["postVars"] = $_POST;
-  	$_SESSION["pageErrors"] = $pageErrors;
-  	header("Location: ../circ/scl_new_form.php");
-  	exit();
-  }
+  $standardLevel=$_POST["standardLevel"];
+  $_POST["standardLevel"]=$standardLevel;
+  $standardGrade=$_POST["standardGrade"];
+  $_POST["standardGrade"]=$standardGrade;
   
-  #**************************************************************************
-  #*  Update library member
-  #**************************************************************************
-  $sclQ->update($scl);
-  $sclQ->close();
+  $mbrQ = new MemberQuery();
+  $mbrQ->connect();
+  $mbrQ->updateStandards($schoolid,$standardLevel,$standardGrade);
+  $mbrQ->close();
+
 
   #**************************************************************************
   #*  Destroy form values and errors
@@ -71,7 +61,7 @@
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  $msg = $loc->getText("sclEditSuccess");
-  header("Location: ../circ/scl_view.php?sclid=".U($scl->getSchoolid())."&reset=Y&msg=".U($msg));
+  $msg = $loc->getText("sclPromoteSuccess",array("grade"=>$standardLevel."".$standardGrade));
+  header("Location: ../circ/scl_view.php?sclid=".U($sclid)."&reset=Y&msg=".U($msg));
   exit();
 ?>
