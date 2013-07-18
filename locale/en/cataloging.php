@@ -245,6 +245,11 @@ $trans["GNU"]                 = "\$text = 'GNU General Public License';";
 
 $trans["catalogResults"]                 = "\$text = 'Search Results';";
 
+#****************************************************************************
+#*  Error text when a duplicate title is entered
+#****************************************************************************
+
+$trans["biblioError2"]            = "\$text = 'This Title already exists in the System.';";
 
 
 ?>

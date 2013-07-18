@@ -19,7 +19,14 @@ require_once("../shared/common.php");
 $tab = "cataloging";
 $nav = "new";
 
+$title='';
+$author='';
+$publication='';
+
 require_once("../classes/Localize.php");
+require_once("../classes/BiblioQuery.php");
+require_once("../classes/Biblio.php");
+
 $loc = new Localize(OBIB_LOCALE,$tab);
 
 if (!isset($_REQUEST['posted'])) {
@@ -35,9 +42,16 @@ if (!isset($_REQUEST['posted'])) {
     require_once("../shared/logincheck.php");
     $biblio = postVarsToBiblio($postVars);
     $pageErrors = array();
-    if (!$biblio->validateData()) {
-      $pageErrors = array_merge($pageErrors, biblioToPageErrors($biblio));
+//     if (!$biblio->validateData()) {
+//       $pageErrors = array_merge($pageErrors, biblioToPageErrors($biblio));
+//     }
+    $biblioQ = new BiblioQuery();
+    $biblioQ->connect();
+    
+    if (!$biblioQ->validateBiblio($title, $author, $publication)) {
+    	$pageErrors["245a"] =$loc->getText("biblioError2");
     }
+    
     $pageErrors = array_merge($pageErrors, customFieldErrors($biblio));
     if (!empty($pageErrors)) {
      showForm($postVars, $pageErrors);
@@ -61,6 +75,9 @@ function postVarsToBiblio($post) {
   $biblio->setCallNmbr3($post["callNmbr3"]);
    //#C1 - begin
   $biblio->setReadingLevel($post["readingLevel"]);
+  $GLOBALS["title"]=$post['values']['245a'];
+  $GLOBALS["author"]=$post['values']['100a'];
+  $GLOBALS["publication"]=$post['values']['260b'];
    //#C1 - end
   $biblio->setLastChangeUserid($_SESSION["userid"]);
   $biblio->setOpacFlg(isset($post["opacFlg"]));
@@ -92,6 +109,7 @@ function biblioToPageErrors($biblio) {
   }
   return $pageErrors;
 }
+
 function customFieldErrors($biblio) {
   require_once("../classes/MaterialFieldQuery.php");
   $matQ = new MaterialFieldQuery();

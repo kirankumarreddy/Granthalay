@@ -84,7 +84,7 @@
   
   $validData = $mbr->validateData();
   if (!$validData) {
-    $pageErrors["lastName"] = $mbr->getLastNameError();
+//    $pageErrors["lastName"] = $mbr->getLastNameError();
     $pageErrors["firstName"] = $mbr->getFirstNameError();
     $_SESSION["postVars"] = $_POST;
     $_SESSION["pageErrors"] = $pageErrors;

@@ -191,6 +191,24 @@ class BiblioQuery extends Query {
     return $bib;
   }
 
+  
+  /****************************************************************************
+   * Function to validate a biblio using title, author and publication
+  * @return void
+  * @access private
+  ****************************************************************************
+  */
+  function validateBiblio($title,$author,$publication)
+  {
+  	$sql = $this->mkSQL("select b.bibid from biblio b,biblio_field a where b.bibid=a.bibid"
+				." and b.title=%Q and b.author= %Q"
+				." and a.tag=260 and a.field_data=%Q",$title,$author,$publication);
+  	$result=$this->exec($sql);
+  	if($result==null)
+  		return true;
+  	return false;
+  }
+  
 
   /****************************************************************************
    * Utility function to add a field to a Biblio object

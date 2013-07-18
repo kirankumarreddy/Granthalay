@@ -106,9 +106,9 @@
 	  if (strlen(trim($columns[6]))==0) {
 			$columns[6] = ' ';
 	  }
-	   
+	   /* Column 7 is for publication*/
 	  $import = new ImportQuery();
-	  $bibid = $import->alreadyInDB($columns[1]);
+	  $bibid = $import->alreadyInDB($columns[1],$columns[2],$columns[7]);
 	  if ($bibid==0) {
  		  $lastinsertid = $import->insertBiblio($columns);
 		  if ($lastinsertid==0) {

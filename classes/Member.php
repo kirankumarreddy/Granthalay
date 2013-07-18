@@ -61,10 +61,10 @@ class Member {
    */
   function validateData() {
     $valid = true;
-//     if ($this->_lastName == "") {
-//       $valid = false;
-//       $this->_lastNameError = "Last name is required.";
-//     }
+//      if ($this->_lastName == "") {
+//        $valid = false;
+//        $this->_lastNameError = "Last name is required.";
+//      }
     if ($this->_firstName == "") {
       $valid = false;
       $this->_firstNameError = "First name is required.";
@@ -115,6 +115,9 @@ class Member {
   }
   function getLastNameError() {
     return $this->_lastNameError;
+  }
+  function getFirstNameError() {
+  	return $this->_firstNameError;
   }
   function getFirstName() {
     return $this->_firstName;

@@ -59,8 +59,8 @@ class MemberQuery extends Query {
     # Building sql statements
     if ($type == OBIB_SEARCH_BARCODE) {
       $col = "barcode_nmbr";
-    } elseif ($type == OBIB_SEARCH_NAME) {
-      $col = "last_name";
+    } elseif ($type == OBIB_SEARCH_FIRST_NAME) {
+      $col = "first_name";
     }
 
     # Building sql statements

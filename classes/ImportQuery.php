@@ -8,6 +8,7 @@ require_once("../classes/Query.php");
 require_once("../classes/Localize.php");
 require_once("../classes/BiblioCopy.php");
 require_once("../classes/BiblioCopyQuery.php");
+require_once("../classes/BiblioQuery.php");
 
 /******************************************************************************
  * Import data access component for library bibliographies
@@ -30,24 +31,35 @@ function insertBiblio($data) {
 	$sql .= " VALUES ('" . date("Y-m-d H:i:s") . "','" . date("Y-m-d H:i:s")  . "','" . 995 .  "','"  . 13 .  "','" .  2 .  "','" . $data[1] .  "','" . $data[2] . "','";
 	$sql .= $data[4] . "')";
    	$qShowStatusResult = $this->_act($sql);
+   	
 	if ($qShowStatusResult==true)
-  		return $this->getInsertID();
-	else
-		return 0;	
+	{
+		$insertid=$this->getInsertID();
+		$sql="INSERT INTO biblio_field(bibid,fieldid,tag,ind1_cd,ind2_cd,subfield_cd,field_data)";
+		$sql.=" VALUES ('".$insertid."','"." 1', '260', 'N', 'N', 'b', '".$data[7]."')";
+		$qShowStatusResult=$this->_act($sql);
+		if($qShowStatusResult==true)
+			return $insertid;
+		return 0;
+	}
+	return 0;
 }
 /**
  * Inserts data into the biblio table
  * @param $data
  * @return int last insterted id if succesefull
  */
-function alreadyInDB($title) {
- 	$sql  = "select bibid from biblio where strcmp(title,'" .$title . "')=0";
- 	$qShowStatusResult = mysql_query($sql) or die(mysql_error());
-	$row = mysql_fetch_assoc($qShowStatusResult);
-	if ($row == 0)
-		return 0;
-	else				  
+function alreadyInDB($title, $author, $publication) {
+	$biblioQ=new BiblioQuery();
+	$biblioQ->connect();
+	if(!$biblioQ->validateBiblio($title, $author, $publication))
+	{
+		$sql  = "select bibid from biblio where strcmp(title,'" .$title . "')=0";
+		$qShowStatusResult = mysql_query($sql) or die(mysql_error());
+		$row = mysql_fetch_assoc($qShowStatusResult);
 		return $row["bibid"];
+	}
+	return 0;
 }
 
 /**

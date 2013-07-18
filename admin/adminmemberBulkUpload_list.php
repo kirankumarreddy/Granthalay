@@ -95,8 +95,8 @@
 	   
 	  	   
 	  $import = new MemberImportQuery();
-	  $mbrid = $import->alreadyInDB($columns[0], $columns[1], $columns[7], $columns[9]);
-	  if ($mbrid==0) {
+//	  $mbrid = $import->alreadyInDB($columns[0], $columns[1], $columns[7], $columns[9]);
+//	  if ($mbrid==0) {
  		  $lastinsertid = $import->insertMember($columns);
 		  if ($lastinsertid==0) {
 		  	//add title to an array
@@ -104,10 +104,10 @@
 			continue;
 		  }
 		  
-	  } else{
-	  	 $b[$rowcount]="Record " . $rowcount . " member already exists in database.";
-			continue;
-	  }		  
+//	  } else{
+//	  	 $b[$rowcount]="Record " . $rowcount . " member already exists in database.";
+//			continue;
+//	  }		  
     }
 	return $b;
   }

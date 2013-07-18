@@ -215,7 +215,7 @@ insert into %prfx%usmarc_subfield_dm values (088,'a','Report number','N');
 insert into %prfx%usmarc_subfield_dm values (088,'z','Canceled/invalid report number','Y');
 insert into %prfx%usmarc_subfield_dm values (088,'6','Linkage','N');
 insert into %prfx%usmarc_subfield_dm values (088,'8','Field link and sequence number','Y');
-insert into %prfx%usmarc_subfield_dm values (100,'a','Personal name','N');
+insert into %prfx%usmarc_subfield_dm values (100,'a','Author name','N');
 insert into %prfx%usmarc_subfield_dm values (100,'b','Numeration','N');
 insert into %prfx%usmarc_subfield_dm values (100,'c','Titles and other words associated with a name','Y');
 insert into %prfx%usmarc_subfield_dm values (100,'d','Dates associated with a name','N');

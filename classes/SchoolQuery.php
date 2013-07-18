@@ -175,7 +175,7 @@ class SchoolQuery extends Query {
     $schoolid = $this->_conn->getInsertId();
     $scl->setSchoolid($schoolid);
     $scl->setSchoolCode($schoolid);
-    $this->update($scl);
+    $this->updateSchoolCode($scl);
     return $schoolid;
   }
 
@@ -196,6 +196,15 @@ class SchoolQuery extends Query {
 						$scl->getContactNumber(),$scl->getEmail(), $scl->getSchoolid());
 
     $this->exec($sql);
+  }
+  
+  function updateSchoolCode($scl)
+  {
+  	$sql = $this->mkSQL("update school set "
+  			. " school_code=%Q"
+  			. " where schoolid=%N",
+  			$scl->getSchoolCode(),$scl->getSchoolid());
+  	$this->exec($sql);
   }
 
   /****************************************************************************

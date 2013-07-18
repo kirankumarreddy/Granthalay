@@ -50,8 +50,8 @@ $trans["indexHeading"]            = "\$text='Circulation';";
 $trans["indexCardHdr"]            = "\$text='Search Member by Card Number:';";
 $trans["indexCard"]               = "\$text='Card Number:';";
 $trans["indexSearch"]             = "\$text='Search';";
-$trans["indexNameHdr"]            = "\$text='Search Member by Last Name:';";
-$trans["indexName"]               = "\$text='Last name start with:';";
+$trans["indexNameHdr"]            = "\$text='Search Member by First Name:';";
+$trans["indexName"]               = "\$text='First name start with:';";
 
 #****************************************************************************
 #*  Translation text for page index.php
