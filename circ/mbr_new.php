@@ -41,7 +41,10 @@
   
   $mbr->setGender($_POST["gender"]);
   $_POST["gender"] = $mbr->getGender();
-
+  
+  $mbr->setGrade($_POST["grade"]);
+  $_POST["grade"] = $mbr->getGrade();
+  
   $mbr->setSchoolId($_POST["school"]);
   $_POST["school"] = $mbr->getSchoolId();
 
@@ -81,7 +84,7 @@
   
   $validData = $mbr->validateData();
   if (!$validData) {
-    $pageErrors["lastName"] = $mbr->getLastNameError();
+//    $pageErrors["lastName"] = $mbr->getLastNameError();
     $pageErrors["firstName"] = $mbr->getFirstNameError();
     $_SESSION["postVars"] = $_POST;
     $_SESSION["pageErrors"] = $pageErrors;
@@ -107,15 +110,11 @@
   #**************************************************************************
   #*  Check for  maximum Roll number
   #**************************************************************************
-  $mbrQ = new MemberQuery();
-  $mbrQ->connect();
-  $rollNumberList = $mbrQ->getMaxRollNumber($mbr->getSchoolId(), $mbr->getStandard());
-  $rollNumber=($rollNumberList[0]['max'])+1;
-  $mbr->setRollNo($rollNumber);
-  $roll=$mbrQ->leading_zeros($rollNumber, 3);
-  $schoolcode= $mbrQ->getSchoolCode($mbr->getSchoolId());
-  $mbr->setBarcodeNmbr($schoolcode."".$roll);
-  $_POST["barcodeNmbr"] = $mbr->getBarcodeNmbr();
+		  $mbrQ = new MemberQuery();
+		  $mbrQ->connect();
+		  $barcode=$mbrQ->assignRollNumber($mbr);
+		  $mbr->setBarcodeNmbr($barcode);
+  
   #**************************************************************************
   #*  Insert new library member
   #**************************************************************************

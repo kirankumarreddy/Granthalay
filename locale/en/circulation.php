@@ -50,8 +50,8 @@ $trans["indexHeading"]            = "\$text='Circulation';";
 $trans["indexCardHdr"]            = "\$text='Search Member by Card Number:';";
 $trans["indexCard"]               = "\$text='Card Number:';";
 $trans["indexSearch"]             = "\$text='Search';";
-$trans["indexNameHdr"]            = "\$text='Search Member by Last Name:';";
-$trans["indexName"]               = "\$text='Last name start with:';";
+$trans["indexNameHdr"]            = "\$text='Search Member by First Name:';";
+$trans["indexName"]               = "\$text='First name start with:';";
 
 #****************************************************************************
 #*  Translation text for page index.php
@@ -77,7 +77,8 @@ $trans["mbrFldsFirstName"]        = "\$text='First Name:';";
 $trans["mbrFldsGender"]        = "\$text='Gender:';";
 $trans["mbrFldsSchool"]        = "\$text='School:';";
 $trans["mbrFldsSchoolTeacher"]        = "\$text='School Teacher:';";
-$trans["mbrFldsStandard"]      = "\$text='Standard:';";
+$trans["mbrFldsStandard"]      = "\$text='Standard/Grade:';";
+$trans["mbrFldsStandardGrade"]      = "\$text='Section:';";
 
 $trans["mbrFldsParentName"]        = "\$text='Parent Name:';";
 $trans["mbrFldsParentOccupation"]  = "\$text='Parent Occupation:';";
@@ -112,6 +113,7 @@ $trans["sclNewForm"]              = "\$text='Add New';";
 $trans["sclEditForm"]             = "\$text='Edit';";
 $trans["sclFldsHeader"]           = "\$text='School:';";
 
+$trans["sclFldsSchoolId"]       = "\$text='School Id:';";
 $trans["sclFldsSchoolName"]       = "\$text='School Name:';";
 $trans["sclFldsSchoolCode"]  	  = "\$text='School Code:';";
 $trans["sclFldsAddress"]          = "\$text='School Address:';";
@@ -119,6 +121,7 @@ $trans["sclFldsContactPerson"]    = "\$text='Contact Person:';";
 $trans["sclFldsContactNumber"]    = "\$text='Contact Number:';";
 $trans["sclFldsEmail"]            = "\$text='Email :';";
 $trans["sclFldsSubmit"]           = "\$text='Submit';";
+$trans["sclFldsPromote"]           = "\$text='Promote';";
 $trans["sclFldsCancel"]           = "\$text='Cancel';";
 $trans["sclsearchResult"]         = "\$text='Result Pages: ';";
 $trans["sclsearchprev"]           = "\$text='prev';";
@@ -127,10 +130,15 @@ $trans["sclsearchNoResults"]      = "\$text='No results found.';";
 $trans["sclsearchFoundResults"]   = "\$text='results found.';";
 $trans["sclsearchSearchResults"]  = "\$text='Search Results:';";
 $trans["sclInformation"]          = "\$text='School Information:';";
+$trans["sclStandard"]          	  = "\$text='Standard:';";
+$trans["sclGrade"]          	  = "\$text='Grade:';";
+
+
 #****************************************************************************
 #*  Translation text for page scl_new.php
 #****************************************************************************
 $trans["sclNewSuccess"]           = "\$text='School has been successfully added.';";
+$trans["sclPromoteSuccess"]       = "\$text='Students of Grade %grade% have been successfully Promoted.';";
 
 #****************************************************************************
 #*  Translation text for page scl_edit.php
@@ -170,6 +178,7 @@ $trans["mbrViewName"]             = "\$text='Name:';";
 $trans["mbrViewAddr"]             = "\$text='Address:';";
 $trans["mbrViewCardNmbr"]         = "\$text='Card Number:';";
 $trans["mbrViewClassify"]         = "\$text='Classification:';";
+$trans["mbrViewStandard"]         = "\$text='Standard:';";
 $trans["mbrViewPhone"]            = "\$text='Phone:';";
 $trans["mbrViewPhoneHome"]        = "\$text='H:';";
 $trans["mbrViewPhoneWork"]        = "\$text='W:';";

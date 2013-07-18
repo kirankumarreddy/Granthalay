@@ -5,8 +5,8 @@
  
   require_once("../shared/common.php");
   $tab = "circulation";
-  $nav = "schoolView";
-  $helpPage = "schoolView";
+  $nav = "promote";
+  $helpPage = "promote";
   
   require_once("../functions/inputFuncs.php");
   require_once("../functions/formatFuncs.php");
@@ -43,6 +43,7 @@
   $sclQ->connect();
   $scl= $sclQ->get($sclid);
   $sclQ->close();
+  
   
   #**************************************************************************
   #*  Show school information

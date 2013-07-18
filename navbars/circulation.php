@@ -5,6 +5,8 @@
  
   require_once("../classes/Localize.php");
   $navloc = new Localize(OBIB_LOCALE,"navbars");
+  /* Couldn't trace out how $mbrid and $sclid is getting set, so manually setting the sclid value from $_GET */
+  $sclid=$_GET["sclid"];
  
 ?>
 <input type="button" onClick="self.location='../shared/logout.php'" value="<?php echo $navloc->getText("Logout"); ?>" class="navbutton"><br />
@@ -74,19 +76,29 @@
 <?php if ($nav == "schoolView") { ?>
  &nbsp; &raquo; <?php echo $navloc->getText("schoolInfo"); ?><br>
  &nbsp; &nbsp; <a href="../circ/scl_edit_form.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("editInfo"); ?></a><br>
+ &nbsp; &nbsp; <a href="../circ/promote_new_form.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("promote"); ?></a><br>
  &nbsp; &nbsp; <a href="../circ/scl_del_confirm.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolDelete"); ?></a><br>
 <?php } ?>
 
 <?php if ($nav == "schoolEdit") { ?>
  &nbsp; <a href="../circ/scl_view.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolInfo"); ?></a><br>
  &nbsp; &nbsp; &raquo; <?php echo $navloc->getText("editInfo"); ?><br>
+ &nbsp; &nbsp; <a href="../circ/promote_new_form.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("promote"); ?></a><br>
  &nbsp; &nbsp; <a href="../circ/scl_del_confirm.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolDelete"); ?></a><br>
 <?php } ?>
 
 <?php if ($nav == "schoolDelete") { ?>
  &nbsp; <a href="../circ/scl_view.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolInfo"); ?></a><br>
  &nbsp; &nbsp; <a href="../circ/scl_edit_form.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("editInfo"); ?></a><br>
+ &nbsp; &nbsp; <a href="../circ/promote_new_form.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("promote"); ?></a><br>
  &nbsp; &nbsp; &raquo; <?php echo $navloc->getText("schoolDelete"); ?><br>
+<?php } ?>
+
+<?php if ($nav == "promote") { ?>
+ &nbsp; <a href="../circ/scl_view.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolInfo"); ?></a><br>
+ &nbsp; &nbsp; <a href="../circ/scl_edit_form.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("editInfo"); ?></a><br>
+ &nbsp; &nbsp; &raquo; <?php echo $navloc->getText("promote"); ?><br>
+ &nbsp; &nbsp; <a href="../circ/scl_del_confirm.php?sclid=<?php echo HURL($sclid);?>" class="alt1"><?php echo $navloc->getText("schoolDelete"); ?></a><br>
 <?php } ?>
 
 

@@ -30,6 +30,8 @@ define("OBIB_SEARCH_SUBJECT","4");
 define("OBIB_SEARCH_NAME","5");
 define("OBIB_SEARCH_CALLNO","6");
 define("OBIB_SEARCH_KEYWORD","7");
+define("OBIB_SEARCH_FIRST_NAME","8");
+define("OBIB_SEARCH_LAST_NAME","9");
 
 /****************************************************************************
  *  Misc. system constants

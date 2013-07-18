@@ -135,6 +135,16 @@
       <?php echo H($mbrClassifyDm[$mbr->getClassification()]);?>
     </td>
   </tr>
+
+    <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewStandard"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getStandard()."".$mbr->getGrade());?>
+    </td>
+  </tr>
+  
   <tr>
     <td class="primary" valign="top">
       <?php echo $loc->getText("mbrViewPhone"); ?>

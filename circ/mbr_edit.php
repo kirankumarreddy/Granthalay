@@ -34,6 +34,9 @@
   $mbrQ->connect();
   $prev_mbr=$mbrQ->get($mbrid);
   $schoolid=$prev_mbr->getSchoolId();
+  $prev_standard=$prev_mbr->getStandard();
+  $prev_grade=$prev_mbr->getGrade();
+  
   $mbr = new Member();
   $mbr->setMbrid($_POST["mbrid"]);
   
@@ -50,6 +53,9 @@
   
   $mbr->setGender($_POST["gender"]);
   $_POST["gender"] = $mbr->getGender();
+  
+  $mbr->setGrade($_POST["grade"]);
+  $_POST["grade"] = $mbr->getGrade();
   
   $mbr->setSchoolId($_POST["school"]);
   $_POST["school"] = $mbr->getSchoolId();
@@ -89,7 +95,7 @@
   
   $validData = $mbr->validateData();
   if (!$validData) {
-    $pageErrors["lastName"] = $mbr->getLastNameError();
+//    $pageErrors["lastName"] = $mbr->getLastNameError();
     $pageErrors["firstName"] = $mbr->getFirstNameError();
     $_SESSION["postVars"] = $_POST;
     $_SESSION["pageErrors"] = $pageErrors;
@@ -100,26 +106,30 @@
   if($schoolid==$mbr->getSchoolId())
   	$schoolChanged=false;
   else 
-	$schoolChanged=true;  
+	$schoolChanged=true;
+  
+  if($prev_standard==$mbr->getStandard())
+  	$standard_changed=false;
+  else
+  	$standard_changed=true;
+  
+  if($prev_grade==$mbr->getGrade())
+  	$grade_changed=false;
+  else
+  	$grade_changed=true;
   
 
 
   #**************************************************************************
   #*  Check for  maximum Roll number
   #**************************************************************************
- if($schoolChanged==true)
- {
- 	$mbrQ = new MemberQuery();
- 	$mbrQ->connect();
- 	$rollNumberList = $mbrQ->getMaxRollNumber($mbr->getSchoolId(), $mbr->getStandard());
- 	$rollNumber=($rollNumberList[0]['max'])+1;
- 	$mbr->setRollNo($rollNumber);
- 	$roll=$mbrQ->leading_zeros($rollNumber, 3);
- 	$schoolcode= $mbrQ->getSchoolCode($mbr->getSchoolId());
- 	$mbr->setBarcodeNmbr($schoolcode."".$roll);
- 	$_POST["barcodeNmbr"] = $mbr->getBarcodeNmbr();
- 	
- }
+	 if($schoolChanged==true ||($standard_changed==true)||($grade_changed==true))
+	 {
+		  $mbrQ = new MemberQuery();
+		  $mbrQ->connect();
+		  $barcode=$mbrQ->assignRollNumber($mbr);
+		  $mbr->setBarcodeNmbr($barcode);
+	 }
   #**************************************************************************
   #*  Check for duplicate barcode number
   #**************************************************************************

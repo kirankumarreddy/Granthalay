@@ -122,6 +122,7 @@ $trans["newMember"]= "\$text = 'New Member';";
 $trans["schoolInfo"]="\$text = 'School Info';";
 $trans["editInfo"]="\$text = 'Edit Info';";
 $trans["schoolDelete"]="\$text = 'Delete';";
+$trans["promote"]="\$text = 'Promote';";
 $trans["schoolSearch"]= "\$text = 'School Search';";
 $trans["newSchool"]= "\$text = 'New School';";
 

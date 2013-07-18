@@ -38,6 +38,7 @@ class Member {
   // #C6 - begin
   var $_schoolId ="";
   var $_standard ="";
+  var $_grade="";
   var $_rollNo ="";
   var $_parentName ="";
   var $_parentOccupation ="";
@@ -60,10 +61,10 @@ class Member {
    */
   function validateData() {
     $valid = true;
-    if ($this->_lastName == "") {
-      $valid = false;
-      $this->_lastNameError = "Last name is required.";
-    }
+//      if ($this->_lastName == "") {
+//        $valid = false;
+//        $this->_lastNameError = "Last name is required.";
+//      }
     if ($this->_firstName == "") {
       $valid = false;
       $this->_firstNameError = "First name is required.";
@@ -115,6 +116,9 @@ class Member {
   function getLastNameError() {
     return $this->_lastNameError;
   }
+  function getFirstNameError() {
+  	return $this->_firstNameError;
+  }
   function getFirstName() {
     return $this->_firstName;
   }
@@ -129,6 +133,10 @@ class Member {
   
   function getStandard() {
     return $this->_standard;
+  }
+
+  function getGrade() {
+  	return $this->_grade;
   }
   
   function getRollNo() {
@@ -214,6 +222,11 @@ class Member {
    function setStandard($value) {
     $this->_standard = trim($value);
   }
+  
+  function setGrade($value) {
+  	$this->_grade = trim($value);
+  }
+  
    function setSchoolTeacher($value){
     $this->_schoolTeacher = trim($value);  	
   }
