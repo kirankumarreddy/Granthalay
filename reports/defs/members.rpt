@@ -9,6 +9,7 @@
 .column create_dt title="Create Date" sort=create_dt
 .parameters
 .	string barcode title="Barcode Starts With"
+. 	string school title="School Code"
 .	string barcodes title="List of Barcodes (spaced)"
 .	string name title="Name Contains"
 .	string address title="Address or Phone or Email Contains"
@@ -26,6 +27,9 @@
 	WHERE 1=1
 .	if_set barcode
 		AND barcode_nmbr LIKE '%"barcode%%%'
+.	end if_set
+.	if_set school
+		AND schoolid = '%"school%'
 .	end if_set
 .	if_set barcodes
 		AND (0=1

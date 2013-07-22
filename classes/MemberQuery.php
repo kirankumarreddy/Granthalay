@@ -6,6 +6,9 @@
 require_once("../shared/global_constants.php");
 require_once("../classes/Member.php");
 require_once("../classes/Query.php");
+require_once("../classes/School.php");
+require_once("../classes/SchoolQuery.php");
+
 
 /******************************************************************************
  * MemberQuery data access component for library members
@@ -56,8 +59,8 @@ class MemberQuery extends Query {
     # Building sql statements
     if ($type == OBIB_SEARCH_BARCODE) {
       $col = "barcode_nmbr";
-    } elseif ($type == OBIB_SEARCH_NAME) {
-      $col = "last_name";
+    } elseif ($type == OBIB_SEARCH_FIRST_NAME) {
+      $col = "first_name";
     }
 
     # Building sql statements
@@ -137,6 +140,15 @@ class MemberQuery extends Query {
     if (isset($array["username"])) {
       $mbr->setLastChangeUsername($array["username"]);
     }
+
+    $mbr->setGender($array["gender"]);
+    $mbr->setSchoolId($array["schoolid"]);
+    $mbr->setParentName($array["parent_name"]);
+    $mbr->setParentOccupation($array["parent_occupation"]);
+    $mbr->setMotherTongue($array["mother_tongue"]);
+    $mbr->setStandard($array["standard"]);
+    $mbr->setSchoolTeacher($array["school_teacher"]);
+	$mbr->setGrade($array["grade"]);
     $mbr->setLastName($array["last_name"]);
     $mbr->setFirstName($array["first_name"]);
     $mbr->setAddress($array["address"]);
@@ -205,15 +217,19 @@ class MemberQuery extends Query {
   function insert($mbr) {
     $sql = $this->mkSQL("insert into member "
                         . "(mbrid, barcode_nmbr, create_dt, last_change_dt, "
-                        . " last_change_userid, last_name, first_name, address, "
-                        . " home_phone, work_phone, email, classification) "
+                        . " last_change_userid, last_name, first_name, address, schoolid ,"
+                        . " standard, grade, roll_no, parent_name, parent_occupation, mother_tongue, "
+						. " home_phone, work_phone, email, classification, gender, school_teacher) "
                         . "values (null, %Q, sysdate(), sysdate(), %N, "
-                        . " %Q, %Q, %Q, %Q, %Q, %Q, %Q) ",
+                        . " %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q, %Q) ",
                         $mbr->getBarcodeNmbr(), $mbr->getLastChangeUserid(),
                         $mbr->getLastName(), $mbr->getFirstName(),
-                        $mbr->getAddress(), $mbr->getHomePhone(),
+                        $mbr->getAddress(), $mbr->getSchoolId() ,
+			$mbr->getStandard(),$mbr->getGrade(),$mbr->getRollNo(),
+			$mbr->getParentName(),$mbr->getParentOccupation(),
+			$mbr->getMotherTongue(),$mbr->getHomePhone(),
                         $mbr->getWorkPhone(), $mbr->getEmail(),
-                        $mbr->getClassification());
+                        $mbr->getClassification(),$mbr->getGender(),$mbr->getSchoolTeacher());
 
     $this->exec($sql);
     $mbrid = $this->_conn->getInsertId();
@@ -222,6 +238,124 @@ class MemberQuery extends Query {
   }
 
   /****************************************************************************
+   * get the Maximum count of the roll number of a perticular standard
+  ****************************************************************************
+  */
+  function getSchoolCode($schoolid)
+  {
+	  $sclq = new SchoolQuery();
+	  $sclq->connect();
+	  $school=$sclq->get($schoolid);
+	  return $school->getSchoolCode();
+  }
+  
+  function getStandards($schoolid)
+  {
+  	$sql=$this->mkSQL("SELECT concat(standard,grade) as standard_grade,max(roll_no) as max" 
+  			." FROM member where schoolid= %N  group by standard_grade order by max desc",$schoolid);
+  	return $this->exec($sql);
+  }
+  
+  function getRollNumber($schoolid,$standard,$grade)
+  {
+  	$sql=$this->mkSQL("select l.roll_no+1 as number from member as l left outer join" 
+  			." member as r on l.roll_no+1=r.roll_no where r.roll_no is null" 
+  			." and l.schoolid=%Q and l.standard=%Q and l.grade=%Q",$schoolid,$standard,$grade);
+  	$result= $this->exec($sql);
+  	return $result[0]['number'];
+  }
+
+  function updateStandards($schoolid,$standard,$grade)
+  {
+  	$sql=$this->mkSQL("update member set standard=standard+1" 
+  			." where standard=%N and grade=%N and schoolid=%N",$standard,$grade,$schoolid);
+  	return $this->exec($sql);
+  }
+  
+  /*Function to check whether the sequence starts with 1 or not and if not, assigns 1 or the discarded number, else gives the max roll_number*/
+  function rollCheck($schoolid,$standard,$grade)
+  {
+  	$sql=$this->mkSQL("select roll_no as roll from member" 
+  			." where grade=%Q and schoolid=%Q and standard=%Q order by roll_no",$grade,$schoolid,$standard);
+  	$result= $this->exec($sql);
+  	$base=$result[0]['roll']-($result[0]['roll']%100);
+//  	$roll_num='';
+  	foreach($result as $mem)
+  	{
+  		if($mem['roll']-$base>1)
+  		{
+  			$roll_num=$base+1;
+  			break;
+  		}
+  		else
+  			$base=$mem['roll'];
+  	}
+  	if((!isset($roll_num))||($roll_num==''))
+  		$roll_num=$base+1;
+  	return $roll_num;
+  }
+  
+  /* Returns the generated Barcode number as the combination of school id and roll number*/
+  function assignRollNumber($mbr)
+  {
+		  $standardsList = $this->getStandards($mbr->getSchoolId());
+		  $standards=array();
+		  foreach ($standardsList as $standard)
+		  {
+		  	$standards[$standard['standard_grade']]=$standard['max'];
+		  }
+		  $std=$mbr->getStandard();
+		  $stdGrade=$mbr->getGrade();
+		  $standardGrade=$std."".$stdGrade;
+		  /*If section does not exists*/
+		  if(($standards[$standardGrade]==null))
+		  {
+		  	$prev_roll=$standardsList[0]['max'];
+		  	if($prev_roll>0)
+		  	{
+		  		$roll=$prev_roll+100;
+		  		$roll-=($prev_roll%100);
+		  	}
+		  	else
+		  		$roll=0;
+		  	$rollNumber=($roll+1);
+		  }
+		  /*If section exists*/
+		  else
+		  {
+		  	$rollNumber=$this->rollCheck($mbr->getSchoolId(), $mbr->getStandard(), $mbr->getGrade());
+		  }
+		  $roll=$this->leading_zeros($rollNumber, 3);
+		  $mbr->setRollNo($roll);
+		  $schoolcode= $this->getSchoolCode($mbr->getSchoolId());
+		  $mbr->setBarcodeNmbr($schoolcode."".$roll);
+	  	return $mbr->getBarcodeNmbr();
+  }
+
+  #**************************************************************************
+  #*  Function for Padding Zeros
+  #**************************************************************************
+  function leading_zeros($value, $places){
+  	if(is_numeric($value)){
+  		for($x = 1; $x <= $places; $x++){
+  			$ceiling = pow(10, $x);
+  			if($value < $ceiling){
+  				$zeros = $places - $x;
+  				for($y = 1; $y <= $zeros; $y++){
+  					$leading .= "0";
+  				}
+  				$x = $places + 1;
+  			}
+  		}
+  		$output = $leading . $value;
+  	}
+  	else{
+  		$output = $value;
+  	}
+  	return $output;
+  }
+  
+  /****************************************************************************
    * Update a library member in the member table.
    * @param Member $mbr library member to update
    * @access public
@@ -229,16 +363,21 @@ class MemberQuery extends Query {
    */
   function update($mbr) {
     $sql = $this->mkSQL("update member set "
-                        . " last_change_dt = sysdate(), last_change_userid=%N, "
-                        . " barcode_nmbr=%Q,  last_name=%Q,  first_name=%Q, "
-                        . " address=%Q, home_phone=%Q, work_phone=%Q, "
-                        . " email=%Q, classification=%Q "
+                        . " last_change_dt = sysdate(), last_change_userid=%N, barcode_nmbr=%Q, "
+                        . " last_name=%Q,  first_name=%Q, address=%Q,"
+						. " schoolid=%Q, standard=%Q, grade=%Q, roll_no=%Q , parent_name=%Q ,"
+						. " parent_occupation=%Q , mother_tongue=%Q ,"
+                        . " home_phone=%Q, work_phone=%Q,"
+                        . " email=%Q, classification=%Q, gender=%Q, school_teacher=%Q "
                         . "where mbrid=%N",
                         $mbr->getLastChangeUserid(), $mbr->getBarcodeNmbr(),
                         $mbr->getLastName(), $mbr->getFirstName(),
-                        $mbr->getAddress(), $mbr->getHomePhone(),
+                        $mbr->getAddress(), $mbr->getSchoolId() ,
+						$mbr->getStandard(),$mbr->getGrade(),$mbr->getRollNo(),
+						$mbr->getParentName(),$mbr->getParentOccupation(),
+						$mbr->getMotherTongue(), $mbr->getHomePhone(),
                         $mbr->getWorkPhone(), $mbr->getEmail(),
-                        $mbr->getClassification(), $mbr->getMbrid());
+                        $mbr->getClassification(),$mbr->getGender(),$mbr->getSchoolTeacher(),$mbr->getMbrid());
 
     $this->exec($sql);
     $this->setCustomFields($mbr->getMbrid(), $mbr->_custom);

@@ -11,6 +11,8 @@
 .parameters
 .	string barcode title="Barcode Starts With"
 .	string barcodes title="List of Barcodes (spaced)"
+. 	string basket title="Basket"
+.	string readingLevel title="Reading Level"
 .	date newer title="Newer than (Date or today)"
 .	order_by default=barcode_nmbr
 .		item barcode_nmbr title="Barcode"
@@ -25,6 +27,12 @@
 	where b.bibid=c.bibid and coll.code=b.collection_cd
 .	if_set barcode
 		and c.barcode_nmbr like '%"barcode%%%'
+.	end if_set
+.	if_set basket
+		and c.basket_nmbr like '%"basket%%%'
+.	end if_set
+.	if_set readingLevel
+		and b.reading_level like '%"readingLevel%%%'
 .	end if_set
 .	if_set barcodes
 		and (0=1

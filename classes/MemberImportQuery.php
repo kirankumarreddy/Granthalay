@@ -6,6 +6,8 @@
 require_once("../shared/global_constants.php");
 require_once("../classes/Query.php");
 require_once("../classes/Localize.php");
+require_once ("../classes/Member.php");
+require_once ("../classes/MemberQuery.php");
 
 /******************************************************************************
  * Import data access component for library members
@@ -13,7 +15,7 @@ require_once("../classes/Localize.php");
  *                    CHANGE HISTORY 
               #C6 -  its a  feature for bulk upload the members into library system in admin section
  * 
- *        @author Kiran Kumar Reddy and Saiteja Bogade
+ *        @author Karthikeya, Kiran Kumar Reddy and Saiteja Bogade
  *
  ******************************************************************************
  */
@@ -25,27 +27,32 @@ function import()	{
 }
 
 function insertMember($data) {
-    $bar = mysql_fetch_array(mysql_query("select max(barcode_nmbr)+1 as max from member"));
- 	$sql  = "INSERT INTO member(barcode_nmbr, first_name, last_name, school_name, standard, roll_no, parent_name," ;
-	$sql .= "parent_occupation, mother_tongue, create_dt, last_change_dt, last_change_userid) ";
-	$sql .= " VALUES ('" . $bar['max'] . "','" . $data[0]  . "','" . $data[1] .  "','"  ;    
-	$sql .= str_replace("'","\'",$data[2]) .  "','" . $data[3] .  "','" . $data[4] .  "','" . $data[5] . "','";
-	$sql .= str_replace("'","\'",$data[6]) . "','" . $data[7] . "','" . date("Y-m-d H:i:s") . "','" . date("Y-m-d H:i:s") . "','";
-	$sql .= 995 . "')";
-   	$qShowStatusResult = $this->_act($sql);
-	if ($qShowStatusResult==true)
-  		return $this->getInsertID();
-	else
-		return 0;	
+	$mbr=new Member();
+	$mbrQ=new MemberQuery();
+	$mbr->setFirstName($data[0]);
+	$mbr->setLastName($data[1]);
+	$mbr->setGender($data[2]);
+	$mbr->setSchoolId($data[3]);
+	$mbr->setStandard($data[4]);
+	$mbr->setGrade($data[5]);
+	$mbr->setRollNo($data[6]);
+	$mbr->setParentName($data[7]);
+	$mbr->setParentOccupation($data[8]);
+	$mbr->setMotherTongue($data[9]);
+	$barcode=$mbrQ->assignRollNumber($mbr);
+	$mbr->setBarcodeNmbr($barcode);
+	$mbr->setClassification(3);
+	
+	return $mbrQ->insert($mbr);
 }
 /**
  * Inserts data into the biblio table
  * @param $data
  * @return int last insterted id if succesefull
  */
-function alreadyInDB($firstName,$lastName,$parentName) {
+function alreadyInDB($firstName,$lastName,$parentName,$motherTongue) {
  	$sql  = "select mbrid from member where strcmp(first_name,'" .$firstName . "')=0 and strcmp(last_name,'" .$lastName ."')=0 ";
-	$sql .= "and strcmp(parent_name,'" .$parentName . "')=0";
+	$sql .= "and strcmp(parent_name,'" .$parentName . "')=0 and strcmp(mother_tongue,'" .$motherTongue ."')=0 ";
  	$qShowStatusResult = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_assoc($qShowStatusResult);
 	if ($row == 0)

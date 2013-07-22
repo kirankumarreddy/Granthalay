@@ -30,6 +30,8 @@ define("OBIB_SEARCH_SUBJECT","4");
 define("OBIB_SEARCH_NAME","5");
 define("OBIB_SEARCH_CALLNO","6");
 define("OBIB_SEARCH_KEYWORD","7");
+define("OBIB_SEARCH_FIRST_NAME","8");
+define("OBIB_SEARCH_LAST_NAME","9");
 
 /****************************************************************************
  *  Misc. system constants
@@ -46,6 +48,11 @@ define("OBIB_STATUS_DISPLAY_AREA","dis");
 define("OBIB_STATUS_INACTIVE","ina");
 //#C4 -end
 define("OBIB_STATUS_ON_ORDER","ord");
+
+define("OBIB_GENDER_MALE","Male");
+define("OBIB_GENDER_FEMALE","Female");
+
+
 define("OBIB_STATUS_SHELVING_CART","crt");
 define("OBIB_STATUS_ON_HOLD","hld");
 define("OBIB_MBR_CLASSIFICATION_JUVENILE","j");

@@ -23,6 +23,8 @@
   require_once("../classes/DmQuery.php");
   require_once("../shared/get_form_vars.php");
   require_once("../classes/Localize.php");
+  require_once('../classes/SchoolQuery.php');
+  require_once('../classes/School.php');
   $loc = new Localize(OBIB_LOCALE,$tab);
 
   #****************************************************************************
@@ -63,6 +65,12 @@
   $mbrQ->connect();
   $mbr = $mbrQ->get($mbrid);
   $mbrQ->close();
+  
+  $sclQ = new SchoolQuery();
+  $sclQ->connect();
+  $sclName = $sclQ->getSchoolName($mbr->getSchoolId());
+  $sclQ->close();
+  
 
   #****************************************************************************
   #*  Check for outstanding balance due
@@ -127,6 +135,16 @@
       <?php echo H($mbrClassifyDm[$mbr->getClassification()]);?>
     </td>
   </tr>
+
+    <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewStandard"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getStandard()."".$mbr->getGrade());?>
+    </td>
+  </tr>
+  
   <tr>
     <td class="primary" valign="top">
       <?php echo $loc->getText("mbrViewPhone"); ?>
@@ -150,6 +168,57 @@
       <?php echo H($mbr->getEmail());?>
     </td>
   </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewGender"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getGender());?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewSchool"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($sclName);?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewSchoolTeacher"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getSchoolTeacher());?>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewParentName"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getParentName());?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewParentOccupation"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getParentOccupation());?>
+    </td>
+  </tr>
+  <tr>
+    <td class="primary" valign="top">
+      <?php echo $loc->getText("mbrViewMotherTongue"); ?>
+    </td>
+    <td valign="top" class="primary">
+      <?php echo H($mbr->getMotherTongue());?>
+    </td>
+  </tr>
+
+
 <?php
   foreach ($memberFieldsDm as $name => $title) {
     if (($value = $mbr->getCustom($name))) {

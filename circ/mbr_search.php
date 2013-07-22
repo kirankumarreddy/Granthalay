@@ -74,7 +74,7 @@
   if ($searchType == "barcodeNmbr") {
     $sType = OBIB_SEARCH_BARCODE;
   } else {
-    $sType = OBIB_SEARCH_NAME;
+    $sType = OBIB_SEARCH_FIRST_NAME;
   }
 
   #****************************************************************************

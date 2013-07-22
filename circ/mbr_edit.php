@@ -30,11 +30,19 @@
   #*  Validate data
   #****************************************************************************
   $mbrid = $_POST["mbrid"];
-
+  $mbrQ = new MemberQuery();
+  $mbrQ->connect();
+  $prev_mbr=$mbrQ->get($mbrid);
+  $schoolid=$prev_mbr->getSchoolId();
+  $prev_standard=$prev_mbr->getStandard();
+  $prev_grade=$prev_mbr->getGrade();
+  
   $mbr = new Member();
   $mbr->setMbrid($_POST["mbrid"]);
+  
   $mbr->setBarcodeNmbr($_POST["barcodeNmbr"]);
   $_POST["barcodeNmbr"] = $mbr->getBarcodeNmbr();
+  
   $mbr->setLastChangeUserid($_SESSION["userid"]);
   $mbr->setLastName($_POST["lastName"]);
   $_POST["lastName"] = $mbr->getLastName();
@@ -42,6 +50,31 @@
   $_POST["firstName"] = $mbr->getFirstName();
   $mbr->setAddress($_POST["address"]);
   $_POST["address"] = $mbr->getAddress();
+  
+  $mbr->setGender($_POST["gender"]);
+  $_POST["gender"] = $mbr->getGender();
+  
+  $mbr->setGrade($_POST["grade"]);
+  $_POST["grade"] = $mbr->getGrade();
+  
+  $mbr->setSchoolId($_POST["school"]);
+  $_POST["school"] = $mbr->getSchoolId();
+  
+  $mbr->setSchoolTeacher($_POST["schoolTeacher"]);
+  $_POST["schoolTeacher"] = $mbr->getSchoolTeacher();
+  
+  $mbr->setParentName($_POST["parentname"]);
+  $_POST["parentname"] = $mbr->getParentName();
+  
+  $mbr->setParentOccupation($_POST["parentoccupation"]);
+  $_POST["parentoccupation"] = $mbr->getParentOccupation();
+  
+  $mbr->setMotherTongue($_POST["mothertongue"]);
+  $_POST["mothertongue"] = $mbr->getMotherTongue();
+  
+  $mbr->setStandard($_POST["standard"]);
+  $_POST["standard"] = $mbr->getStandard();
+  
   $mbr->setHomePhone($_POST["homePhone"]);
   $_POST["homePhone"] = $mbr->getHomePhone();
   $mbr->setWorkPhone($_POST["workPhone"]);
@@ -62,8 +95,7 @@
   
   $validData = $mbr->validateData();
   if (!$validData) {
-    $pageErrors["barcodeNmbr"] = $mbr->getBarcodeNmbrError();
-    $pageErrors["lastName"] = $mbr->getLastNameError();
+//    $pageErrors["lastName"] = $mbr->getLastNameError();
     $pageErrors["firstName"] = $mbr->getFirstNameError();
     $_SESSION["postVars"] = $_POST;
     $_SESSION["pageErrors"] = $pageErrors;
@@ -71,6 +103,33 @@
     exit();
   }
 
+  if($schoolid==$mbr->getSchoolId())
+  	$schoolChanged=false;
+  else 
+	$schoolChanged=true;
+  
+  if($prev_standard==$mbr->getStandard())
+  	$standard_changed=false;
+  else
+  	$standard_changed=true;
+  
+  if($prev_grade==$mbr->getGrade())
+  	$grade_changed=false;
+  else
+  	$grade_changed=true;
+  
+
+
+  #**************************************************************************
+  #*  Check for  maximum Roll number
+  #**************************************************************************
+	 if($schoolChanged==true ||($standard_changed==true)||($grade_changed==true))
+	 {
+		  $mbrQ = new MemberQuery();
+		  $mbrQ->connect();
+		  $barcode=$mbrQ->assignRollNumber($mbr);
+		  $mbr->setBarcodeNmbr($barcode);
+	 }
   #**************************************************************************
   #*  Check for duplicate barcode number
   #**************************************************************************

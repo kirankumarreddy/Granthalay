@@ -48,6 +48,10 @@ font.small {
   font-size: 10px;
   font-family: <?php echo H(OBIB_PRIMARY_FONT_FACE);?>;
 }
+font.large {
+  font-size: 20px;
+  font-family: <?php echo H(OBIB_PRIMARY_FONT_FACE);?>;
+}
 a.nav {
   color: <?php echo H(OBIB_ALT1_FONT_COLOR);?>;
   font-size: 10px;
