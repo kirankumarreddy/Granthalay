@@ -148,16 +148,17 @@
 <?php
   }
 ?>
-  <!-- #C1- end-->
+  <!-- #C1- end
   <tr>
     <td nowrap="true" class="primary" valign="top">
-      <?php echo $loc->getText("biblioFieldsOpacFlg"); ?>:
+      <?php //echo $loc->getText("biblioFieldsOpacFlg"); ?>:
     </td>
     <td valign="top" class="primary">
       <input type="checkbox" name="opacFlg" value="CHECKED"
-        <?php if (isset($postVars["opacFlg"])) echo H($postVars["opacFlg"]); ?> >
+        <?php //if (isset($postVars["opacFlg"])) echo H($postVars["opacFlg"]); ?> >
     </td>
   </tr>
+  -->
 <!--  
   <tr>
     <td colspan="2" nowrap="true" class="primary">

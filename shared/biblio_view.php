@@ -172,14 +172,16 @@
       <?php if (isset($biblioFlds["245a"])) echo H($biblioFlds["245a"]->getFieldData());?>
     </td>
   </tr>
+  <!--  
   <tr>
     <td class="primary" valign="top">
-      <?php printUsmarcText(245,"b",$marcTags, $marcSubflds, FALSE);?>:
+      <?php //printUsmarcText(245,"b",$marcTags, $marcSubflds, FALSE);?>:
     </td>
     <td valign="top" class="primary">
-      <?php if (isset($biblioFlds["245b"])) echo H($biblioFlds["245b"]->getFieldData());?>
+      <?php //if (isset($biblioFlds["245b"])) echo H($biblioFlds["245b"]->getFieldData());?>
     </td>
   </tr>
+  -->
   <tr>
     <td class="primary" valign="top">
       <?php printUsmarcText(100,"a",$marcTags, $marcSubflds, FALSE);?>:
@@ -188,26 +190,30 @@
       <?php if (isset($biblioFlds["100a"])) echo H($biblioFlds["100a"]->getFieldData());?>
     </td>
   </tr>
+  <!--  
   <tr>
     <td nowrap="true" class="primary" valign="top">
-      <?php printUsmarcText(245,"c",$marcTags, $marcSubflds, FALSE);?>:
+      <?php //printUsmarcText(245,"c",$marcTags, $marcSubflds, FALSE);?>:
     </td>
     <td valign="top" class="primary">
-      <?php if (isset($biblioFlds["245c"])) echo H($biblioFlds["245c"]->getFieldData());?>
+      <?php //if (isset($biblioFlds["245c"])) echo H($biblioFlds["245c"]->getFieldData());?>
     </td>
   </tr>
+  -->
+  <!--  
   <tr>
     <td nowrap="true" class="primary" valign="top">
       <?php echo $loc->getText("biblioViewOpacFlg"); ?>:
     </td>
     <td valign="top" class="primary">
-      <?php if ($biblio->showInOpac()) {
+      <?php /* if ($biblio->showInOpac()) {
         echo $loc->getText("biblioViewYes");
       } else {
         echo $loc->getText("biblioViewNo");
-      }?>
+      } */?>
     </td>
   </tr>
+  -->
 </table>
 <br />
 
